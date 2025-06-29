@@ -1,0 +1,1 @@
+{"version":3,"file":"init_variables.js","sourceRoot":"","sources":["../app/init_variables.ts"],"names":[],"mappings":";;;;IACW,QAAA,aAAa,GAGtB,gEAAgE,CAAC;IAMxD,QAAA,SAAS,GAClB,0GAA0G,CAAC;IAGlG,QAAA,WAAW,GAGpB,gEAAgE,CAAC;IAExD,QAAA,SAAS,GAGlB,+EAA+E,CAAC;IAQvE,QAAA,eAAe,GAAI,CAAC,CAAC;IACrB,QAAA,aAAa,GAAG,EAAE,CAAC;IAEnB,QAAA,cAAc,GAAI,EAAE,CAAC;IACrB,QAAA,YAAY,GAAG,EAAE,CAAC"}

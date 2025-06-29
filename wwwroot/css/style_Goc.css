@@ -1,0 +1,229 @@
+﻿.esri-widget{
+  font-family: "Segoe UI","Roboto","Helvetica Neue","Arial","Noto Sans","sans-serif","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.split,
+.gutter.gutter-horizontal {
+  float: left;
+}
+
+.gutter.gutter-horizontal {
+  float: left;
+  background-color: #eee;
+  cursor: ew-resize;
+
+  z-index: 1000;
+  background: #eee url(../img/splitter-thumb.gif) no-repeat scroll center center;
+}
+.sidebar-wrapper {
+  /* width: 445px; */
+  padding-top: 10px;
+  z-index: 1000;
+  /* box-shadow: 0 0 10px #5f9ea0; */
+  border: 1px solid #efefef;
+  border-radius: 1px;
+}
+.main-map-wrapper {
+  border: 1px solid #efefef;
+  border-radius: 1px;
+}
+.sidebar-wrapper,
+.main-map-wrapper,
+.gutter.gutter-horizontal {
+  height: calc(100% - 90px);
+}
+.flex {
+  display: flex;
+  flex-direction: row;
+}
+.header {
+  padding: 2px 2px;
+  /* border-bottom: 1px solid #efefef; */
+  border-bottom: 1px solid #ccc;
+  background: rgba(6, 121, 24, 1);
+  color: #eee;
+}
+.logo img {
+  width: 80px;
+}
+.btn img {
+border-radius:50%;
+-moz-border-radius:50%;
+-webkit-border-radius:50%;
+}
+.main-container {
+  /* padding: 5px; */
+}
+#viewDiv {
+  width: 100%;
+  height: 100%;
+}
+.toolbar {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+
+  background: #f2f2f2;
+}
+.toolbar .btn {
+  color: #8c8c8c;
+}
+.active {
+  /* background-color: #d9d9d9; */
+  /* box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); */
+}
+
+.btn.focus,
+.btn:focus {
+  /* border: none; */
+  box-shadow: none;
+}
+.tab-content {
+  padding: 2px;
+}
+.nav-link {
+  display: block;
+  padding: 5px;
+}
+.toggle-tree {
+  background-image: url(../img/expand.png);
+  background-repeat: no-repeat;
+  width: 16px !important;
+  height: 16px;
+  padding: 2px 20px 0px 0px;
+}
+.collapse-layer {
+  background-image: url(../img/collapse.png);
+  background-repeat: no-repeat;
+}
+#toggle_layer_ul li,
+#toggle_layer_ul ul {
+  margin: 5px 10px;
+}
+.layer-item a,
+.layer-item input,
+.layer-item span {
+  margin: 0 2px;
+}
+
+.float-left {
+  float: left;
+}
+
+.form-section-container {
+  clear: both;
+}
+.page-title {
+  text-transform: uppercase;
+  /* display: inline; */
+  /* height:100%; */
+  /* text-align: center;
+  justify-content: center; */
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-60%);
+  transform: translateY(-60%);
+}
+.page-title-container {
+  /* height: 100%; */
+  position: relative;
+}
+#page-header {
+  /* height: 110px; */
+  overflow: hidden;
+  font-size: 11px;
+}
+#sidebar {
+  overflow-x: auto;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  position: relative;
+  width: 300px;
+  /* calc(20% - 2.5px); */
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+#close-left-panel {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+}
+
+#main-content {
+  position: relative;
+}
+
+#open-left-panel {
+  position: absolute;
+  left: 2px;
+  top: 10px;
+  z-index: 1000;
+  background: rgba(6, 121, 24, 1);
+  border: 0;
+  color: white;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  width: 30px;
+  padding: 3px;
+}
+
+#main-map {
+  width: calc(100% - 305px);
+}
+.col-resize {
+  cursor: col-resize;
+}
+.hidden {
+  display: none;
+}
+
+.esri-ui-top-left {
+  top: 25px;
+  left: 0;
+}
+.form-section-container{
+  padding: 5px 0;
+}
+.nav.nav-tabs{
+  margin-bottom: 10px;
+}
+
+.input-text{
+  width: 100%;
+  /* height: 32px; */
+}
+
+.input-text-50{
+  width: 47%;
+  /* height: 32px; */
+}
+
+.selected{
+  background: #f3f3f3;
+}

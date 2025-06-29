@@ -1,0 +1,78 @@
+import { TileMapLayer } from './tile_layer';
+import MapImageLayer from "esri/layers/MapImageLayer";
+import EsriMap from "esri/Map";
+import MapView from "esri/views/MapView";
+import * as init from "./init_variables";
+import { MapLayer } from './map_layer';
+import BasemapToggle from "esri/widgets/BasemapToggle";
+import WMSLayer from "esri/layers/WMSLayer";//Thêm để đọc layer wms
+import Basemap from "esri/Basemap";
+//import SceneView from "esri/views/SceneView";
+
+//var hanhChinhMap:any;
+export var map_layer = new MapLayer(init.hanhchinh_url);
+export var till_layer = new TileMapLayer(init.hanhchinh_url);
+//export var map_layer1 = new MapLayer(init.AnhVeTinhEsri_url);
+
+
+//Thêm để đọc layer wms
+//require(["esri/Map", "esri/views/SceneView", "esri/layers/WMSLayer"], (Map, SceneView, WMSLayer) => {
+  //const layer = new WMSLayer({
+    export var layer = new WMSLayer({
+    //url: "https://ows.terrestris.de/osm/service",
+    url: "http://ows.mapvn.vn:8080/wms?",
+    sublayers: [
+      {
+        name: "bandodatyle"
+      }
+    ]
+  });
+
+  export var basemap = new Basemap({
+    baseLayers: [layer],
+    title: "basemap",
+    id: "0",
+    thumbnailUrl:"img/streetsVN.png"//"https://js.arcgis.com/3.16/esri/images/basemap/streets.jpg"//Hiển thị ảnh nhỏ ở phần chuyển đổi bản đồ nền
+  });
+
+//Tạo nền background bản đồ giao thông bên tư liệu
+export var map_layer_Background = new MapLayer("https://basemap.bandovn.vn/server/rest/services/bdgiaothong_v11/MapServer?f=jsapi");
+
+export const map = new EsriMap({
+  //basemap: "streets-vector"
+  basemap: "satellite"
+  //basemap: "hybrid"
+  //basemap : {baseLayers: [layer]}
+  //basemap : {baseLayers: [map_layer_Background.getMapLayer()]}
+  //basemap: basemap
+});
+
+export const view = new MapView({
+  map: map,
+  container: "viewDiv",
+  center: [105, 15.5],
+  zoom: 5,
+});
+
+export const basemapToggle = new BasemapToggle({
+  view: view,  // The view that provides access to the map's "streets-vector" basemap
+  //nextBasemap: "satellite"  // Allows for toggling to the "hybrid" basemap
+  nextBasemap: basemap//{baseLayers: [layer]}//"streets-vector"  // Allows for toggling to the "hybrid" basemap
+  //nextBasemap: "satellite",
+});
+
+//Add chuyển đổi nền Background
+view.ui.add(basemapToggle, {
+  position: "bottom-left"
+  //position: "top-right"
+});
+
+//Thêm ảnh thể hiện tỷ lệ mũi tên bên phải phía dưới
+const imgScale = new Image();
+imgScale.src="img/Scale.png";
+view.ui.add(imgScale, {
+  position: "bottom-right"
+  //position: "top-right"
+});
+
+

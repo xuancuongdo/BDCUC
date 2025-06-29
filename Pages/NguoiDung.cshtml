@@ -1,0 +1,71 @@
+@page
+@model CanhBaoApp.Pages.NguoiDung
+@{
+    ViewData["Title"] = "Quản trị người dùng";
+}
+<link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <div class="row">
+        <div class="col-sm"><a href="./ThemMoiNguoiDung" class="btn btn-primary">Thêm mới</a></div>
+    </div>
+
+    <div id="grid" class="search-grid"></div>
+
+</div>
+
+<script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+<script>
+    var data = [];
+    var data2 =  [
+    ['John', 'john@example.com', '(353) 01 222 3333'],
+    ['Mark', 'mark@gmail.com',   '(01) 22 888 4444'],
+    ['Eoin', 'eo3n@yahoo.com',   '(05) 10 878 5554'],
+    ['Nisen', 'nis900@gmail.com',   '313 333 1923']
+  ];
+    @foreach (var item in Model.userModel){
+        <text>
+            data.push(['@item.Username','@item.Email','@item.Phone','@item.Role','@item.ID']);
+        </text>
+    }
+    console.log(data)
+        console.log(data2)
+
+    var grid = new gridjs.Grid({
+        columns: ['Tên đăng nhập', 'Email', 'Số điện thoại','Vai trò', {
+            name: 'Hành động',
+            formatter: (_, row) => gridjs.html(`<a title='Xóa' href='./XoaNguoiDung?id=${row.cells[4].data}'>Xóa</a>  | <a title='Cập nhật' href='./CapNhatNguoiDung?id=${row.cells[4].data}'>Cập nhật</a>`)
+        }],
+        pagination: {
+            enabled: true,
+            limit: 20
+        },
+        data:data,
+        search: {
+            selector: (cell, rowIndex, cellIndex) => cellIndex === 0 ? cell : null
+        },
+        language: {
+            'search': {
+                'placeholder': '🔍 tìm kiếm...'
+            },
+            'pagination': {
+                'previous': 'Trước',
+                'next': 'Sau',
+                'showing': 'Hiển thị từ',
+                'results': () => 'bản ghi',
+                'to': 'đến',
+                'of': 'của'
+            },
+            "error": "Có lỗi trong quá trình lấy dữ liệu",
+            "noRecordsFound": "Không tìm thấy bản ghi"
+        }, className: {
+            td: 'custom-td-class',
+            th: 'custom-td-class',
+            table: 'custom-table-classname',
+            footer: 'custom-button-class',
+        },
+        resizable: true
+    }).render(document.getElementById("grid"));
+    grid.updateConfig().forceRender();
+</script>

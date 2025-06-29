@@ -1,0 +1,307 @@
+﻿@page
+@model IndexModel
+@using System.Security.Claims;
+@using Microsoft.AspNetCore.Http;
+@using Microsoft.Extensions.Configuration;
+@inject IConfiguration Configuration;
+@{
+    ViewData["Title"] = "Trang chủ";
+    Layout = "_Layout_Map";
+}
+<style>
+</style>
+
+
+
+<div id="main" class="main-container container-fluid1">
+    <header id="page-header" class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 col-sm-6 logo"><img src="img/Logo.png"></div>
+                <div class="col-md-5 d-none d-md-block d-lg-block d-xl-block page-title-container">
+                    <h5 class="page-title">Chuyển dịch vỏ trái đất tại Việt Nam</h5>
+                </div>
+                <div class="col-md-5 col-sm-6">
+                    <div class="page-title">
+                        <strong>Cục Đo đạc, Bản đồ và Thông tin địa lý Việt Nam</strong><br/>
+                        <strong>Trung tâm Quản lý mạng lưới trạm định vị vệ tinh quốc gia</strong><br/>
+                        
+                        <strong><a href="/Logout">
+    &nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp
+    &nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp    Đăng xuất
+</a></strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <button class="btn-open-left hidden" id="open-left-panel"><i class="fas fa-angle-right"></i></button>
+        <aside class="split sidebar-wrapper" id="sidebar">
+            <button class="btn btn-close-left" id="close-left-panel"><i class="fas fa-angle-left"></i></button>
+            <ul class="nav nav-tabs" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-item nav-link active" id="layer-tab" data-toggle="pill" href="#layer" role="tab"
+                       aria-controls="layer" aria-selected="true">Thiết lập hiển thị</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" id="phienhieu-tab" data-toggle="pill" href="#phienhieu" role="tab"
+                       aria-controls="phienhieu" aria-selected="true">Chi tiết chuyển dịch</a>
+                </li>
+
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="layer" role="tabpanel" aria-labelledby="layer-tab">
+                    <div id="toggle-layer" class="esri-component esri-widget esri-widget--panel">
+                        <div id="toggle-layer-content" class="rendererDiv">
+                            <div class="select-container">
+                                <header class="header-title">Các tùy chỉnh</header>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tab-pane fade show" id="phienhieu" role="tabpanel" aria-labelledby="phienhieu-tab">
+                    <div id="selection-widget" class="esri-component esri-widget esri-widget--panel">
+                        <div class="rendererDiv">
+                            <div class="select-container">
+                                <div class="form-section-container">
+                                    <div id="TableCORS" class="container"></div>
+                                </div>
+                            </div>
+                            <!--<div class="select-container" >
+                                <header class="header-title">Chọn đối tượng trên bản đồ</header>
+                            </div>-->
+                            <!--
+                            <section class="layout-section">
+                                <div class="form-section-container">
+                                    <div id="draw-point"
+                                        class="esri-component esri-widget--button esri-widget float-left"
+                                        role="button" tabindex="0"
+                                        title="Chọn đối tượng theo điểm trên bản đồ - giữ SHIFT để chọn liên tiếp">
+                                        <span aria-hidden="true" class="esri-icon esri-icon-cursor"></span>
+                                        <span class="esri-icon-font-fallback-text">Chọn đối
+                                            tượng theo điểm</span>
+                                    </div>
+
+                                    <div id="draw-rectangle"
+                                        class="esri-component esri-widget--button esri-widget float-left"
+                                        role="button" tabindex="0" title="Chọn đối tượng theo vùng chữ nhật">
+                                        <span id="select-icon" aria-hidden="true"
+                                            class="esri-icon esri-icon-checkbox-unchecked"></span>
+                                        <span class="esri-icon-font-fallback-text">Chọn đối
+                                            tượng theo vùng chữ nhật</span>
+                                    </div>
+
+                                    <div id="draw-polygon"
+                                        class="esri-component esri-widget--button esri-widget float-left"
+                                        role="button" tabindex="0" title="Chọn đối tượng theo vùng bất kì">
+                                        <span id="" aria-hidden="true" class="esri-icon esri-icon-polygon"></span>
+                                        <span class="esri-icon-font-fallback-text">Chọn đối
+                                            tượng theo vùng bất kì</span>
+                                    </div>
+                                    <div id="delete-graphic"
+                                        class="esri-component esri-widget--button esri-widget float-left"
+                                        role="button" tabindex="0" title="Xóa đối tượng đã chọn">
+                                        <span id="" aria-hidden="true" class="esri-icon esri-icon-trash"></span>
+                                        <span class="esri-icon-font-fallback-text">Xóa đối tượng đã chọn</span>
+                                    </div>
+                                </div>
+                                <div class="form-section-container">
+                                    <label class="esri-feature-form__label">Chọn lớp dữ liệu làm việc</label>
+                                    <select id="data-layer" class="esri-select" data-target-property="data-layer">
+                                        <option value="-1">--chọn lớp--</option>
+                                    </select>
+
+                                </div>
+                                <div class="form-section-container">
+                                    <label class="esri-feature-form__label">Giao nhau với lớp (tùy chọn)</label>
+                                    <select id="data-intersect" class="esri-select"
+                                        data-target-property="data-intersect">
+                                        <option value="-1">(không)</option>
+                                    </select>
+
+                                </div>
+                                <div class="form-section-container">
+                                    <label class="esri-feature-form__label">Thời gian </label>
+                                    <select id="year-type" class="esri-select">
+                                        <option value="0">Danh sách năm, cách nhau bằng dấu ','</option>
+                                        <option value="1">Khoảng từ năm - đến năm</option>
+                                    </select>
+
+
+                                </div>
+                                <div class="form-section-container">
+                                    <input type="text" id="year-input" class="esri-input input-text"
+                                        data-target-property="year-input" placeholder="Năm1,năm 2,năm 3,..." />
+                                    <div class="year-from-to hidden">
+                                        <input type="text" id="year-input1" class="esri-input input-text-50 "
+                                            data-target-property="year-input1" placeholder="Từ năm" /> -
+                                        <input type="text" id="year-input2" class="esri-input input-text-50"
+                                            data-target-property="year-input1" placeholder="Đến năm" />
+                                    </div>
+
+                                </div>
+                                <div class="form-section-container">
+                                    <label id="lable-result" class="esri-feature-form__label">Kết quả chọn:</label>
+                                    <div>Tổng số: <span id="result-count">0</span></div>
+                                    <textarea id="data-selected" rows="5" cols="38" disabled>
+
+                                </textarea>
+
+                                </div>
+                                <div class="form-section-container">
+                                    <a class="btn btn-outline-secondary btn-sm" id="btnDownload"><i
+                                            class="fas fa-download"></i> Tải
+                                        file</a>
+                                    <a class="btn btn-outline-secondary btn-sm" id="btnZoomTo"><i
+                                            class="fas fa-search-plus"></i> Phóng
+                                        đến</a>
+                                </div>
+                                <div id="loading"></div>
+                            </section>
+                            -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div> -->
+            </div>
+
+        </aside>
+        <div id="" class="gutter gutter-horizontal" style="width: 5px;"></div>
+        <section class="split main-map-wrapper" id="main-map">
+            <!-- <nav id="toolbar-nav" class="toolbar">
+                <a href="#" class="btn btn-control" id="sidebar-toggle">
+                    <i class="fa fa-caret-left" id="left-right"></i>
+                </a>
+                <a href="#" class="btn btn-control" title="In bản đồ" id="btn-print-map">
+                    <i class="fa fa-print"></i>
+                </a>
+            </nav> -->
+            <div id="viewDiv">
+            </div>
+        </section>
+    </main>
+
+</div>
+<div id="btnPrint" class="esri-component esri-widget--button esri-widget" role="button" tabindex="0"
+     aria-label="In bản đồ" title="In">
+    <span aria-hidden="true" class="esri-icon esri-icon-printer"></span><span class="esri-icon-font-fallback-text">In</span>
+</div>
+
+<!-- mới thêm 20-1 -->
+<div id="btnIdentify" class="esri-component esri-widget--button esri-widget" role="button" tabindex="0"
+     aria-label="Xem thông tin đối tượng" title="Xem thông tin đối tượng">
+    <span aria-hidden="true"
+          class="esri-icon-description"></span><span class="esri-icon-font-fallback-text">
+        Xem thông tin đối
+        tượng
+    </span>
+</div>
+@section Scripts {
+
+    <script>
+        // console.log("pathname:" + location.pathname);
+        var locationPath = location.pathname.replace(/\/[^/]*$/, "");
+        // console.log("locationPath:" + locationPath);
+        window.dojoConfig = {
+            packages: [
+                {
+                    name: "app",
+                    location: locationPath + "/js",
+                },
+            ],
+        };
+    </script>
+    <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="~/node_modules/popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="~/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/node_modules/file-saver/dist/FileSaver.min.js"></script>
+    <script src="~/node_modules/arcgis_js_api/library/4.18/init.js"></script>
+
+    <script src="~/node_modules/fortawesome/fontawesome-free/js/all.min.js"></script>
+
+
+
+    <script>
+        //require(["js/main", "js/identify_task", "js/print", "js/toggle_layer", "js/select_feature", "js/features_search"]);
+        //Phải để "app/table_vantoc" sau "app/toggle_layer" mới nhận js này,
+        require(["app/main", "app/identify_task", "app/print", "app/toggle_layer", "app/table_vantoc", "app/select_feature", "app/features_search"]);
+        //require(["app/main", "app/identify_task", "app/print", "app/toggle_layer", "app/features_search"]);
+        //require(["app/main", "app/print", "app/toggle_layer", "app/select_feature","app/features_search",]);
+    </script>
+
+    <script>
+        mouseIsDown = false;
+        // var instance = Split(['#sidebar', '#main-map'], {
+        //     sizes: [20, 80],
+        //     minSize: [0, 500],
+        //     gutterSize: 5,
+        // })
+
+        $("#close-left-panel").click(function () {
+            $("#sidebar").hide();
+            $(".gutter").hide();
+            $("#main-map").attr("style", "width:100%");
+
+            $("#open-left-panel").show();
+            //instance.setSizes([0, 100]);
+            //instance.collapse(0);
+        });
+
+        $("#open-left-panel").click(function () {
+            $("#sidebar").show();
+            $(".gutter ").show();
+            $("#main-map").attr("style", "width: calc(100% - 305px)");
+            $("#sidebar").attr("style", "width:300px");
+            $("#open-left-panel").hide();
+            //instance.setSizes([20, 80]);
+        });
+        $('.gutter').on('mousedown', function () {
+            mouseIsDown = true;
+            //timeoutId = setTimeout(myFunction, 1000);$
+            $(".gutter").addClass("col-resize");
+        })
+            .on('mouseup', function () {
+                //clearTimeout(timeoutId);
+                mouseIsDown = false;
+                $(".gutter").removeClass("col-resize");
+            });
+        $('.gutter').on('mousemove', function (event) {
+            event.preventDefault();
+            //console.log(event.clientX + "   "+event.clientY);
+            executeResize(event);
+        });
+        $("#sidebar").on("mousemove", function (event) {
+            event.preventDefault();
+            //console.log(event.clientX + "   "+event.clientY);
+            executeResize(event);
+        });
+        $("#main-map").on("mousemove", function (event) {
+            event.preventDefault();
+            executeResize(event);
+        });
+        $(document).on('mouseup mouseleave', function () {
+            mouseIsDown = false;
+
+        });
+        function executeResize(event) {
+            if (mouseIsDown) {
+                var x = event.clientX;
+                var width = $("#main-content").width();
+                var min_width = (200 * 100) / width
+                var percent = (x * 100) / width;
+                var percent_main = 100 - percent;
+                console.log($("#sidebar").width());
+                if (percent > min_width && percent_main > 30) {
+                    $("#sidebar").attr("style", `width: calc(${percent}% - 2.5px)`);
+                    $("#main-map").attr("style", `width: calc(${percent_main}% - 2.5px)`);
+                }
+            }
+        }
+    </script>
+
+}

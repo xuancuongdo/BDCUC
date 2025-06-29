@@ -1,0 +1,28 @@
+{
+  "name": "MapGIS",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@dojo/themes": "^6.0.0",
+    "@fortawesome/fontawesome-free": "^5.15.1",
+    "@popperjs/core": "^2.5.4",
+    "@types/arcgis-js-api": "^4.17.0",
+    "@types/file-saver": "^2.0.1",
+    "@types/jquery": "^3.5.4",
+    "bootstrap": "^4.5.3",
+    "file-saver": "^2.0.5",
+    "jquery": "^3.5.1",
+    "split.js": "^1.6.2",
+    "tslib": "^2.0.3"
+  },
+  "devDependencies": {
+    "dojo-typings": "^1.11.11"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
