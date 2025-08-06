@@ -1,13 +1,80 @@
-define(["require", "exports", "tslib", "./map_variables", "./init_variables"], function (require, exports, tslib_1, map_variables_1, init) {
+define(["require", "exports", "tslib", "./map_variables", "./init_variables", "./table_vantoc"], function (require, exports, tslib_1, map_variables_1, init, table_vantoc_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.http = void 0;
+    exports.http = http;
     init = tslib_1.__importStar(init);
+    table_vantoc_1 = tslib_1.__importDefault(table_vantoc_1);
     var toggle_layer = false;
     $(document).on("change", ".layer-toggle", function () {
         var id = $(this).data("id");
         var sublayer = map_variables_1.map_layer.findSublayerById(parseInt(id));
         sublayer.visible = !sublayer.visible;
+    });
+    $(document).on("change", "#hien_thi_cors", function () {
+        var sublayer = map_variables_1.map_layer.findSublayerById(init.ErsiLayers.TenTramCORS);
+        sublayer.visible = !sublayer.visible;
+    });
+    $(document).on("change", ".esri-toggle-tree__radio", function () {
+        const checkedIds = [];
+        $(".esri-toggle-tree__radio").each(function () {
+            if ($(this).is(":checked")) {
+                checkedIds.push($(this).attr("id"));
+            }
+        });
+        var visible_layer_id = 0;
+        if (checkedIds.length === 2) {
+            if (checkedIds.includes("huong_ngang") && checkedIds.includes("chu_ky_trung_binh_hang_nam")) {
+                visible_layer_id = init.ErsiLayers.Matphang_NE_TB_2682019;
+            }
+            if (checkedIds.includes("huong_thang_dung") && checkedIds.includes("chu_ky_trung_binh_hang_nam")) {
+                visible_layer_id = init.ErsiLayers.DoCao_H_TB_2682019;
+            }
+            if (checkedIds.includes("huong_ngang") && checkedIds.includes("chu_ky_1_thang")) {
+                visible_layer_id = init.ErsiLayers.Matphang_NE_month;
+            }
+            if (checkedIds.includes("huong_thang_dung") && checkedIds.includes("chu_ky_1_thang")) {
+                visible_layer_id = init.ErsiLayers.DoCao_H_month;
+            }
+            if (checkedIds.includes("huong_ngang") && checkedIds.includes("chu_ky_1_nam")) {
+                visible_layer_id = init.ErsiLayers.Matphang_NE_year;
+            }
+            if (checkedIds.includes("huong_thang_dung") && checkedIds.includes("chu_ky_1_nam")) {
+                visible_layer_id = init.ErsiLayers.DoCao_H_year;
+            }
+            if (checkedIds.includes("huong_ngang") && checkedIds.includes("chu_ky_5_nam")) {
+                visible_layer_id = init.ErsiLayers.Matphang_NE_5years;
+            }
+            if (checkedIds.includes("huong_thang_dung") && checkedIds.includes("chu_ky_5_nam")) {
+                visible_layer_id = init.ErsiLayers.DoCao_H_5years;
+            }
+            if (checkedIds.includes("huong_ngang") && checkedIds.includes("chu_ky_tu_260819")) {
+                visible_layer_id = init.ErsiLayers.Matphang_NE_10years;
+            }
+            if (checkedIds.includes("huong_thang_dung") && checkedIds.includes("chu_ky_tu_260819")) {
+                visible_layer_id = init.ErsiLayers.DoCao_H_10years;
+            }
+            var sublayer = map_variables_1.map_layer.findSublayerById(visible_layer_id);
+            sublayer.visible = true;
+            map_variables_1.map_layer.getVisibleLayers().forEach((sublayerId) => {
+                if (sublayerId !== visible_layer_id && sublayerId !== init.ErsiLayers.TenTramCORS
+                    && sublayerId !== init.ErsiLayers.HanhChinhTinh) {
+                    var sublayer = map_variables_1.map_layer.findSublayerById(sublayerId);
+                    sublayer.visible = false;
+                }
+            });
+            (0, table_vantoc_1.default)(visible_layer_id);
+        }
+    });
+    $(document).on("click", "#download_moving_detail", function () {
+        const KhoangThoiGian = document.getElementById("KhoangThoiGian").outerHTML;
+        const table = document.getElementById("bangVanToc").outerHTML;
+        const blob = new Blob([KhoangThoiGian, table], { type: "application/vnd.ms-excel" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "bang.xls";
+        a.click();
+        URL.revokeObjectURL(url);
     });
     function http(request) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
@@ -16,7 +83,6 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables"], f
             return body;
         });
     }
-    exports.http = http;
     const fetch_layer_name = () => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
         const response = yield fetch(init.layer_url);
         const legends = yield fetch(init.hanhchinh_url + "/legend?f=pjson");
@@ -111,7 +177,7 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables"], f
             }
         }
     }
-    fetch_layer_name();
+    (0, table_vantoc_1.default)(0);
     $(document).on('click', ".toggle-tree", function () {
         $(this).toggleClass("collapse-layer");
     });

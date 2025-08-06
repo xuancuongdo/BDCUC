@@ -32,3 +32,4 @@ out/
 # Bower components
 wwwroot/bower_components/
 wwwroot/node_modules/
+node_modules/

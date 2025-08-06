@@ -12,31 +12,33 @@ import { fieldNames } from "esri/core/sql/WhereClause";*/
 
 
 //
-const id_layerShow = 0;//Lớp thứ 0 (bắt đầu từ 0) là lớp Tên trạm CORS//Lắp id layer khi hiển thị
-const myFeatureLayer = new FeatureLayer({
-  url: init.map_feature + "/" + id_layerShow,
-  title: "Bảng chuyển dịch"
-});
+
 //
 //addTable;
 //Viết hàm kiểu này thì nó thực hiện chạy luôn vào gọi hàm phía dưới
-const addTableVanToc = async () => {
+export default async function addTableVanToc(id_layerShow: number) {
+  //const id_layerShow = 0;//Lớp thứ 0 (bắt đầu từ 0) là lớp Tên trạm CORS//Lắp id layer khi hiển thị
+  const myFeatureLayer = new FeatureLayer({
+    url: init.map_feature + "/" + id_layerShow,
+    title: "Bảng chuyển dịch"
+  });
   /*var html = "<table><tr><td>123</td><td>456</td></tr>";
   html += "<tr><td>123</td><td>456</td></tr></table>";
   document.getElementById("TableCORS").innerHTML = html;*/
   //
   var bangVanToc = document.createElement('table');
+  bangVanToc.id = "bangVanToc";
   var KhoangThoiGian = document.createElement('div');
+  KhoangThoiGian.id = "KhoangThoiGian";
   KhoangThoiGian.style.display = "flex";
   //KhoangThoiGian.style.justifyContent = "center";
   KhoangThoiGian.style.alignItems = "center";
   //Gọi hàm truy vấn các đối tượng trong lớp Tên trạm CORS
   //executeQuery();
-  myFeatureLayer.queryFeatures(null).then(function(response: any){
+  myFeatureLayer.queryFeatures(null).then(function (response: any) {
     if (response.features.length > 0) {
       //Là lớp dữ liệu trung bình 1 năm
-      if(id_layerShow == 0 || id_layerShow == 1)
-      {
+      if (id_layerShow == 0 || id_layerShow == 1) {
         bangVanToc.innerHTML = "<tr><td><b>STT</b></td><td><b>Tên trạm</b></td><td><b>d.North<br />m/year</b></td><td><b>d.East<br />m/year</b></td><td><b>d.Up<br />m/year</b></td><td><b>Mặt phẳng<br />m/year</b></td></tr>";
       }
       else
@@ -45,27 +47,31 @@ const addTableVanToc = async () => {
       response.features.map((feature: any) => {
         //list_feature.push(feature);//Đưa danh sách đối tượng vào mảng list_feature
         //alert("1");
-        bangVanToc.innerHTML += "<tr><td>"+feature.attributes.STT+"</td><td>"+feature.attributes.Tên
-        +"</td><td>"+feature.attributes.VNorth.toFixed(4)+"</td><td>"+feature.attributes.VEast.toFixed(4)+"</td><td>"+feature.attributes.VUp.toFixed(4)
-        +"</td><td>"+feature.attributes.Vmp.toFixed(4)+"</td></tr>";
+        bangVanToc.innerHTML += "<tr><td>" + feature.attributes.STT + "</td><td>" + feature.attributes.Tên
+          + "</td><td>" + feature.attributes.VNorth.toFixed(4) + "</td><td>" + feature.attributes.VEast.toFixed(4) + "</td><td>" + feature.attributes.VUp.toFixed(4)
+          + "</td><td>" + feature.attributes.Vmp.toFixed(4) + "</td></tr>";
         //
-        if(KhoangThoiGian.innerHTML == "")
-        {
+        if (KhoangThoiGian.innerHTML == "") {
           KhoangThoiGian.innerHTML = "Khoảng thời gian: "
           KhoangThoiGian.innerHTML += feature.attributes.ThoiDiemThamChieu;
         }
       });
     }
-    else{
-      bangVanToc.innerHTML ="Chi tiết dữ liệu trống";
+    else {
+      bangVanToc.innerHTML = "Chi tiết dữ liệu trống";
     }
   });
+  const tableCORS = document.getElementById("TableCORS");
+  // Xóa toàn bộ con
+  while (tableCORS.firstChild) {
+    tableCORS.removeChild(tableCORS.firstChild);
+  }
   //Add dữ liệu vào id TableCORS khai ở index.cshtml
-  document.getElementById("TableCORS").appendChild(KhoangThoiGian);
-  document.getElementById("TableCORS").appendChild(bangVanToc);
+  tableCORS.appendChild(KhoangThoiGian);
+  tableCORS.appendChild(bangVanToc);
 };
 
-addTableVanToc();//Gọi thực hiện hàm
+//addTableVanToc();//Gọi thực hiện hàm
 
 //Khai báo dùng dạng bảng của Arcgis, nhưng không tùy chỉnh được kích thước và ẩn đi ... của bảng nên không dùng
 //

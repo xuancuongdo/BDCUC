@@ -1,0 +1,55 @@
+<!-- Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <form id="searchForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="searchModalLabel">Tìm theo trạm và thời gian</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <!-- Form tìm kiếm -->
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="station" class="form-label">Chọn trạm</label>
+                            <select class="form-select" id="station" name="Station" required>
+                                <option value="" disabled selected>-- Chọn trạm --</option>
+                                <option value="Tram01">Trạm 01</option>
+                                <option value="Tram02">Trạm 02</option>
+                                <option value="Tram03">Trạm 03</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="fromDate" class="form-label">Từ ngày</label>
+                            <input type="date" class="form-control" id="fromDate" name="FromDate" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="toDate" class="form-label">Đến ngày</label>
+                            <input type="date" class="form-control" id="toDate" name="ToDate" required>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-success">Tìm</button>
+                    </div>
+
+                    <hr />
+
+                    <!-- Biểu đồ nằm trong modal -->
+                    <div>
+                        <h6 class="mt-3">Kết quả biểu đồ</h6>
+                        <canvas id="myChart" height="200"></canvas>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Tìm</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

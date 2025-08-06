@@ -1,7 +1,8 @@
 import { view } from "./map_variables";
 import { map_layer } from "./map_variables";
 import * as init from "./init_variables";
-
+import { LayerOptions } from "./init_variables";
+import addTableVanToc from "./table_vantoc";
 interface HttpResponse<T> extends Response {
   parsedBody?: T;
 }
@@ -30,7 +31,86 @@ $(document).on("change", ".layer-toggle", function () {
   sublayer.visible = !sublayer.visible;
   //console.log(sublayer);
 });
+$(document).on("change", "#hien_thi_cors", function () {
+  var sublayer = map_layer.findSublayerById(init.ErsiLayers.TenTramCORS);
+  sublayer.visible = !sublayer.visible;
+  //console.log(sublayer);
+});
+$(document).on("change", ".esri-toggle-tree__radio", function () {
+  //do something
+  const checkedIds: string[] = [];
 
+  $(".esri-toggle-tree__radio").each(function () {
+    if ($(this).is(":checked")) {
+      checkedIds.push($(this).attr("id"));
+    }
+  });
+  var visible_layer_id :number = 0;
+  if (checkedIds.length === 2) {
+    //2 options selected
+    if (checkedIds.includes("huong_ngang") && checkedIds.includes("chu_ky_trung_binh_hang_nam")) {
+      visible_layer_id = init.ErsiLayers.Matphang_NE_TB_2682019;
+    }
+    if (checkedIds.includes("huong_thang_dung") && checkedIds.includes("chu_ky_trung_binh_hang_nam")) {
+      visible_layer_id = init.ErsiLayers.DoCao_H_TB_2682019;
+    }
+    if (checkedIds.includes("huong_ngang") && checkedIds.includes("chu_ky_1_thang")) {
+      visible_layer_id = init.ErsiLayers.Matphang_NE_month;
+    }
+    if (checkedIds.includes("huong_thang_dung") && checkedIds.includes("chu_ky_1_thang")) {
+      visible_layer_id = init.ErsiLayers.DoCao_H_month;
+    }
+    if (checkedIds.includes("huong_ngang") && checkedIds.includes("chu_ky_1_nam")) {
+      visible_layer_id = init.ErsiLayers.Matphang_NE_year;
+    }
+    if (checkedIds.includes("huong_thang_dung") && checkedIds.includes("chu_ky_1_nam")) {
+      visible_layer_id = init.ErsiLayers.DoCao_H_year;
+    }
+    if (checkedIds.includes("huong_ngang") && checkedIds.includes("chu_ky_5_nam")) {
+      visible_layer_id = init.ErsiLayers.Matphang_NE_5years;
+    }
+    if (checkedIds.includes("huong_thang_dung") && checkedIds.includes("chu_ky_5_nam")) {
+      visible_layer_id = init.ErsiLayers.DoCao_H_5years;
+    }
+    if (checkedIds.includes("huong_ngang") && checkedIds.includes("chu_ky_tu_260819")) {
+      visible_layer_id = init.ErsiLayers.Matphang_NE_10years;
+    }
+    if (checkedIds.includes("huong_thang_dung") && checkedIds.includes("chu_ky_tu_260819")) {
+      visible_layer_id = init.ErsiLayers.DoCao_H_10years;
+    }
+
+    //visible layer
+    var sublayer = map_layer.findSublayerById(visible_layer_id);
+    sublayer.visible = true;
+
+    //hide other layers
+    map_layer.getVisibleLayers().forEach((sublayerId) => {
+      if (sublayerId !== visible_layer_id && sublayerId !== init.ErsiLayers.TenTramCORS 
+        && sublayerId !== init.ErsiLayers.HanhChinhTinh) {
+        var sublayer = map_layer.findSublayerById(sublayerId);
+        sublayer.visible = false;
+      }
+    });
+
+    //add table
+    addTableVanToc(visible_layer_id);
+  }
+
+});
+
+$(document).on("click", "#download_moving_detail", function () {        
+  //do something
+  const KhoangThoiGian = document.getElementById("KhoangThoiGian").outerHTML;
+  const table = document.getElementById("bangVanToc").outerHTML;
+  const blob = new Blob([KhoangThoiGian,table], { type: "application/vnd.ms-excel" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "bang.xls"; // Hoặc bang.xls nếu muốn mở bằng Excel
+  a.click();
+  URL.revokeObjectURL(url);
+});
 // $(".layer-toggle").change(function () {
 //   var id = $(this).data("id");
 //   var sublayer = map_layer.findSublayerById(parseInt(id));
@@ -258,7 +338,7 @@ const fetch_layer_name = async () => {
     }
   });*/
 
-///////////////////////
+  ///////////////////////
 
 
 };
@@ -272,7 +352,8 @@ function getLegendImage(layerId: number, layer_legends: any[]) {
   }
 }
 
-fetch_layer_name();
+//add tablevantoc for the first layer
+addTableVanToc(0);
 
 $(document).on('click', ".toggle-tree", function () {
   $(this).toggleClass("collapse-layer");

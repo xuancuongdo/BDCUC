@@ -1,12 +1,14 @@
 ﻿@page
 @model IndexModel
-@using System.Security.Claims;
-@using Microsoft.AspNetCore.Http;
-@using Microsoft.Extensions.Configuration;
-@inject IConfiguration Configuration;
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Http
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
 @{
     ViewData["Title"] = "Trang chủ";
     Layout = "_Layout_Map";
+    // Lấy tên người dùng từ ClaimsPrincipal
+    var userName = User.FindFirst(ClaimTypes.Name)?.Value ?? "Khách";
 }
 <style>
 </style>
@@ -21,15 +23,16 @@
                 <div class="col-md-5 d-none d-md-block d-lg-block d-xl-block page-title-container">
                     <h5 class="page-title">Chuyển dịch vỏ trái đất tại Việt Nam</h5>
                 </div>
-                <div class="col-md-5 col-sm-6">
+                <div class="col-md-4 col-sm-6">
                     <div class="page-title">
-                        <strong>Cục Đo đạc, Bản đồ và Thông tin địa lý Việt Nam</strong><br/>
-                        <strong>Trung tâm Quản lý mạng lưới trạm định vị vệ tinh quốc gia</strong><br/>
-                        
-                        <strong><a href="/Logout">
-    &nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp
-    &nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp    Đăng xuất
-</a></strong>
+                        <strong>Cục Đo đạc, Bản đồ và Thông tin địa lý Việt Nam</strong><br />
+                        <strong>Trung tâm Quản lý mạng lưới trạm định vị vệ tinh quốc gia</strong><br />
+                    </div>
+                </div>
+                <div class="col-md-1 text-end">
+                    <div class="page-title">
+                        <strong>Xin chào, <span id="username">@userName</span></strong><br />
+                        <strong><a href="/Logout">Đăng xuất</a></strong>
                     </div>
                 </div>
             </div>
@@ -43,11 +46,11 @@
             <ul class="nav nav-tabs" id="pills-tab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-item nav-link active" id="layer-tab" data-toggle="pill" href="#layer" role="tab"
-                       aria-controls="layer" aria-selected="true">Thiết lập hiển thị</a>
+                        aria-controls="layer" aria-selected="true">Thiết lập hiển thị</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-item nav-link" id="phienhieu-tab" data-toggle="pill" href="#phienhieu" role="tab"
-                       aria-controls="phienhieu" aria-selected="true">Chi tiết chuyển dịch</a>
+                        aria-controls="phienhieu" aria-selected="true">Chi tiết chuyển dịch</a>
                 </li>
 
             </ul>
@@ -58,7 +61,86 @@
                             <div class="select-container">
                                 <header class="header-title">Các tùy chỉnh</header>
                             </div>
+                            <ul class="toggle_layer_ul" class="esri-toggle-tree">
+                                <li class="esri-toggle-tree__item">
+                                    <strong class="esri-toggle-tree__title">Chu kỳ</strong>
+                                    <ul class="toggle_layer_ul">
+                                        <li class="esri-toggle-tree__item">
+                                            <label class="esri-toggle-tree__label">
+                                                <input type="radio" name="chu_ky" class="esri-toggle-tree__radio"
+                                                    id="chu_ky_trung_binh_hang_nam" checked>
+                                                <span class="esri-toggle-tree__title">Trung bình hàng năm (từ ngày 26/08/2019)</span>
+                                            </label>
+                                        </li>
+                                        <li class="esri-toggle-tree__item">
+                                            <label class="esri-toggle-tree__label">
+                                                <input type="radio" name="chu_ky" class="esri-toggle-tree__radio"
+                                                    id="chu_ky_1_thang">
+                                                <span class="esri-toggle-tree__title">1 tháng</span>
+                                            </label>
+                                        </li>
+                                        <li class="esri-toggle-tree__item">
+                                            <label class="esri-toggle-tree__label">
+                                                <input type="radio" name="chu_ky" class="esri-toggle-tree__radio"
+                                                    id="chu_ky_1_nam">
+                                                <span class="esri-toggle-tree__title">1 năm</span>
+                                            </label>
+                                        </li>
+                                        <li class="esri-toggle-tree__item">
+                                            <label class="esri-toggle-tree__label">
+                                                <input type="radio" name="chu_ky" class="esri-toggle-tree__radio"
+                                                    id="chu_ky_5_nam">
+                                                <span class="esri-toggle-tree__title">5 năm</span>
+                                            </label>
+                                        </li>
+                                        <li class="esri-toggle-tree__item">
+                                            <label class="esri-toggle-tree__label">
+                                                <input type="radio" name="chu_ky" class="esri-toggle-tree__radio"
+                                                    id="chu_ky_tu_260819">
+                                                <span class="esri-toggle-tree__title">Từ ngày 26/08/2019</span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="esri-toggle-tree__item">
+                                    <strong class="esri-toggle-tree__title">Hướng</strong>
+                                    <ul class="toggle_layer_ul">
+                                        <li class="esri-toggle-tree__item">
+                                            <label class="esri-toggle-tree__label">
+                                                <input type="radio" name="huong" class="esri-toggle-tree__radio"
+                                                    id="huong_ngang" checked>
+                                                <span class="esri-toggle-tree__title">Hướng nằm ngang</span>
+                                            </label>
+                                        </li>
+                                        <li class="esri-toggle-tree__item">
+                                            <label class="esri-toggle-tree__label">
+                                                <input type="radio" name="huong" class="esri-toggle-tree__radio"
+                                                    id="huong_thang_dung">
+                                                <span class="esri-toggle-tree__title">Hướng thẳng đứng</span>
+                                            </label>
+                                        </li>
 
+                                    </ul>
+                                </li>
+                                <li class="esri-toggle-tree__item">
+                                    <strong class="esri-toggle-tree__title">Khác</strong>
+                                    <ul class="toggle_layer_ul">
+                                        <li class="esri-toggle-tree__item">
+                                            <label class="esri-toggle-tree__label">
+                                                <input type="checkbox" class="esri-toggle-tree__checkbox"
+                                                    id="hien_thi_cors" checked>
+                                                <span class="esri-toggle-tree__title">Hiển thị tên các trạm CORS</span>
+                                            </label>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <li class="esri-toggle-tree__item">
+                                    <a class="esri-toggle-tree__label" href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Biểu đồ chuyển dịch</a>
+                                </li>
+                                <li class="esri-toggle-tree__item">
+                                    <a class="esri-toggle-tree__label" href="#" id="download_moving_detail" >Tải xuống chi tiết chuyển dịch</a></li>
+                            </ul>
                         </div>
 
                     </div>
@@ -188,19 +270,22 @@
 
 </div>
 <div id="btnPrint" class="esri-component esri-widget--button esri-widget" role="button" tabindex="0"
-     aria-label="In bản đồ" title="In">
-    <span aria-hidden="true" class="esri-icon esri-icon-printer"></span><span class="esri-icon-font-fallback-text">In</span>
+    aria-label="In bản đồ" title="In">
+    <span aria-hidden="true" class="esri-icon esri-icon-printer"></span><span
+        class="esri-icon-font-fallback-text">In</span>
 </div>
 
 <!-- mới thêm 20-1 -->
 <div id="btnIdentify" class="esri-component esri-widget--button esri-widget" role="button" tabindex="0"
-     aria-label="Xem thông tin đối tượng" title="Xem thông tin đối tượng">
-    <span aria-hidden="true"
-          class="esri-icon-description"></span><span class="esri-icon-font-fallback-text">
+    aria-label="Xem thông tin đối tượng" title="Xem thông tin đối tượng">
+    <span aria-hidden="true" class="esri-icon-description"></span><span class="esri-icon-font-fallback-text">
         Xem thông tin đối
         tượng
     </span>
 </div>
+
+<!-- Gọi partial -->
+@await Html.PartialAsync("_ViewStatistics")
 @section Scripts {
 
     <script>
@@ -220,7 +305,7 @@
     <script src="~/node_modules/popperjs/core/dist/umd/popper.min.js"></script>
     <script src="~/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/node_modules/file-saver/dist/FileSaver.min.js"></script>
-    <script src="~/node_modules/arcgis_js_api/library/4.18/init.js"></script>
+    <script src="https://js.arcgis.com/4.18/"></script>
 
     <script src="~/node_modules/fortawesome/fontawesome-free/js/all.min.js"></script>
 
@@ -236,29 +321,35 @@
 
     <script>
         mouseIsDown = false;
+        var isShowLeftPanel = true;
         // var instance = Split(['#sidebar', '#main-map'], {
         //     sizes: [20, 80],
         //     minSize: [0, 500],
         //     gutterSize: 5,
         // })
-
+        var OpenCloseLeftPanel = (isShow)=>{
+            if (isShow) {
+                $("#sidebar").show();
+                $(".gutter").show();
+                $("#main-map").attr("style", "width: calc(100% - 315px)");
+                $("#sidebar").attr("style", "width:310px");
+                $("#open-left-panel").hide();
+            } else {
+                $("#sidebar").hide();
+                $(".gutter").hide();
+                $("#main-map").attr("style", "width:100%");
+                $("#open-left-panel").show();
+            }
+        }
         $("#close-left-panel").click(function () {
-            $("#sidebar").hide();
-            $(".gutter").hide();
-            $("#main-map").attr("style", "width:100%");
+            isShowLeftPanel = !isShowLeftPanel;
+            OpenCloseLeftPanel(false);
 
-            $("#open-left-panel").show();
-            //instance.setSizes([0, 100]);
-            //instance.collapse(0);
         });
 
         $("#open-left-panel").click(function () {
-            $("#sidebar").show();
-            $(".gutter ").show();
-            $("#main-map").attr("style", "width: calc(100% - 305px)");
-            $("#sidebar").attr("style", "width:300px");
-            $("#open-left-panel").hide();
-            //instance.setSizes([20, 80]);
+            isShowLeftPanel = !isShowLeftPanel;
+            OpenCloseLeftPanel(isShowLeftPanel);
         });
         $('.gutter').on('mousedown', function () {
             mouseIsDown = true;

@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "outDir": "js",
-        "watch": true,
+
         "removeComments": true,
         "module": "amd",
         "noImplicitAny": true,
@@ -13,7 +13,7 @@
         "target": "es6",
         "experimentalDecorators": true,
         "preserveConstEnums": true,
-        "suppressImplicitAnyIndexErrors": true,
+
         "importHelpers": true,
         "moduleResolution": "node",
         // "noUnusedLocals": true

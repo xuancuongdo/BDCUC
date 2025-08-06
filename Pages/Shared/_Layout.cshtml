@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+@{
+    var userName = User.FindFirst(ClaimTypes.Name)?.Value ?? "Khách";
+}
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
