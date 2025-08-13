@@ -5,13 +5,13 @@ define(["require", "exports", "tslib", "esri/layers/MapImageLayer", "./init_vari
     MapImageLayer_1 = tslib_1.__importDefault(MapImageLayer_1);
     init = tslib_1.__importStar(init);
     class MapLayer {
-        getMapLayer() {
-            return this.hanhChinhMap;
-        }
         constructor(url) {
             this.hanhChinhMap = new MapImageLayer_1.default({
                 url: url,
             });
+        }
+        getMapLayer() {
+            return this.hanhChinhMap;
         }
         getVisibleLayersIDAllType() {
             var lst = this.hanhChinhMap.allSublayers;

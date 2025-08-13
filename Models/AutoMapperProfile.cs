@@ -13,6 +13,7 @@ namespace CanhBaoApp.Models
             CreateMap<UserModel, UserModelUpdate>().ReverseMap();
             CreateMap<Location, LocationModel>().ReverseMap();
             CreateMap<User, UserModelUpdate>().ReverseMap();
+            CreateMap<ToaDoItrf, ToaDoItrfModel>().ReverseMap();
         }
     }
 }

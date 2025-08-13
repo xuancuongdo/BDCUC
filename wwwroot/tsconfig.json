@@ -20,7 +20,7 @@
     },
     "include": [
         "./app/*"
-    ],
+, "app/models/MovingChartModel.ts"    ],
     "exclude": [
         "css",
         "fonts",

@@ -1,7 +1,7 @@
 define(["require", "exports", "tslib", "./map_variables", "./init_variables", "./table_vantoc"], function (require, exports, tslib_1, map_variables_1, init, table_vantoc_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.http = http;
+    exports.http = void 0;
     init = tslib_1.__importStar(init);
     table_vantoc_1 = tslib_1.__importDefault(table_vantoc_1);
     var toggle_layer = false;
@@ -62,7 +62,7 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables", ".
                     sublayer.visible = false;
                 }
             });
-            (0, table_vantoc_1.default)(visible_layer_id);
+            table_vantoc_1.default(visible_layer_id);
         }
     });
     $(document).on("click", "#download_moving_detail", function () {
@@ -83,6 +83,7 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables", ".
             return body;
         });
     }
+    exports.http = http;
     const fetch_layer_name = () => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
         const response = yield fetch(init.layer_url);
         const legends = yield fetch(init.hanhchinh_url + "/legend?f=pjson");
@@ -177,7 +178,7 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables", ".
             }
         }
     }
-    (0, table_vantoc_1.default)(0);
+    table_vantoc_1.default(0);
     $(document).on('click', ".toggle-tree", function () {
         $(this).toggleClass("collapse-layer");
     });

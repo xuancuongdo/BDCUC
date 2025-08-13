@@ -38,6 +38,7 @@ namespace CanhBaoApp
             services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
             services.AddScoped<IAccountServices, AccountServices>();
             services.AddScoped<ILocationServices, LocationServices>();
+            services.AddScoped<IToaDoITRFService, ToaDoITRFService>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>
             {
@@ -80,6 +81,9 @@ namespace CanhBaoApp
             {
                 endpoints.MapRazorPages();
                 endpoints.MapHub<CanhBaoHubs>("/CanhBaoHubs");
+                endpoints.MapControllerRoute(
+                        name: "default",
+                        pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

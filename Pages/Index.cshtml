@@ -69,7 +69,8 @@
                                             <label class="esri-toggle-tree__label">
                                                 <input type="radio" name="chu_ky" class="esri-toggle-tree__radio"
                                                     id="chu_ky_trung_binh_hang_nam" checked>
-                                                <span class="esri-toggle-tree__title">Trung bình hàng năm (từ ngày 26/08/2019)</span>
+                                                <span class="esri-toggle-tree__title">Trung bình hàng năm (từ ngày
+                                                    26/08/2019)</span>
                                             </label>
                                         </li>
                                         <li class="esri-toggle-tree__item">
@@ -136,10 +137,13 @@
                                     </ul>
                                 </li>
                                 <li class="esri-toggle-tree__item">
-                                    <a class="esri-toggle-tree__label" href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Biểu đồ chuyển dịch</a>
+                                    <a class="esri-toggle-tree__label" href="" class="btn btn-primary"
+                                        data-toggle="modal" data-target="#statisticModal">Biểu đồ chuyển dịch</a>
                                 </li>
                                 <li class="esri-toggle-tree__item">
-                                    <a class="esri-toggle-tree__label" href="#" id="download_moving_detail" >Tải xuống chi tiết chuyển dịch</a></li>
+                                    <a class="esri-toggle-tree__label" href="#" id="download_moving_detail">Tải xuống
+                                        chi tiết chuyển dịch</a>
+                                </li>
                             </ul>
                         </div>
 
@@ -287,7 +291,6 @@
 <!-- Gọi partial -->
 @await Html.PartialAsync("_ViewStatistics")
 @section Scripts {
-
     <script>
         // console.log("pathname:" + location.pathname);
         var locationPath = location.pathname.replace(/\/[^/]*$/, "");
@@ -297,8 +300,11 @@
                 {
                     name: "app",
                     location: locationPath + "/js",
-                },
-            ],
+                }, {
+                    name: "chart.js",
+                    location: locationPath + "/js/lib/chartjs/chart.js"
+                }
+            ]
         };
     </script>
     <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
@@ -309,12 +315,12 @@
 
     <script src="~/node_modules/fortawesome/fontawesome-free/js/all.min.js"></script>
 
-
+    
 
     <script>
         //require(["js/main", "js/identify_task", "js/print", "js/toggle_layer", "js/select_feature", "js/features_search"]);
         //Phải để "app/table_vantoc" sau "app/toggle_layer" mới nhận js này,
-        require(["app/main", "app/identify_task", "app/print", "app/toggle_layer", "app/table_vantoc", "app/select_feature", "app/features_search"]);
+        require(["app/main", "app/identify_task", "app/print", "app/toggle_layer", "app/table_vantoc", "app/select_feature", "app/features_search", "app/statistic"]);
         //require(["app/main", "app/identify_task", "app/print", "app/toggle_layer", "app/features_search"]);
         //require(["app/main", "app/print", "app/toggle_layer", "app/select_feature","app/features_search",]);
     </script>
@@ -327,7 +333,7 @@
         //     minSize: [0, 500],
         //     gutterSize: 5,
         // })
-        var OpenCloseLeftPanel = (isShow)=>{
+        var OpenCloseLeftPanel = (isShow) => {
             if (isShow) {
                 $("#sidebar").show();
                 $(".gutter").show();

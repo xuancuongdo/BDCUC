@@ -1,7 +1,6 @@
 define(["require", "exports", "tslib", "esri/layers/FeatureLayer", "./init_variables"], function (require, exports, tslib_1, FeatureLayer_1, init) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = addTableVanToc;
     FeatureLayer_1 = tslib_1.__importDefault(FeatureLayer_1);
     init = tslib_1.__importStar(init);
     function addTableVanToc(id_layerShow) {
@@ -45,6 +44,7 @@ define(["require", "exports", "tslib", "esri/layers/FeatureLayer", "./init_varia
             tableCORS.appendChild(bangVanToc);
         });
     }
+    exports.default = addTableVanToc;
     ;
 });
 //# sourceMappingURL=table_vantoc.js.map
