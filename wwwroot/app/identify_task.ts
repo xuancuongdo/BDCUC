@@ -85,7 +85,9 @@ function executeIdentifyTask(event: any) {
     .then(function (response: any) {
       var results = response.results;
 
-      return results.map(function (result: any) {
+      return results
+      .filter((result:any) => !TenTram.includes(result.layerName)) // loại bỏ trước
+      .map(function (result: any) {
         var feature = result.feature;
         var layerName = result.layerName;
         // console.log(feature.attributes);

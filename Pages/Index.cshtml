@@ -18,21 +18,24 @@
 <div id="main" class="main-container container-fluid1">
     <header id="page-header" class="header">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-2 col-sm-6 logo"><img src="img/Logo.png"></div>
-                <div class="col-md-5 d-none d-md-block d-lg-block d-xl-block page-title-container">
-                    <h5 class="page-title">Chuyển dịch vỏ trái đất tại Việt Nam</h5>
+            <div class="row flex-wrap">
+                <!-- Logo -->
+                <div class="col-md-4 col-sm-2 logo order-1">
+                    <img src="img/Logo.png" alt="Logo">
                 </div>
-                <div class="col-md-4 col-sm-6">
+
+                <!-- Tiêu đề lớn -->
+                <div class="col-md-8 col-sm-10 order-2">
                     <div class="page-title">
-                        <strong>Cục Đo đạc, Bản đồ và Thông tin địa lý Việt Nam</strong><br />
-                        <strong>Trung tâm Quản lý mạng lưới trạm định vị vệ tinh quốc gia</strong><br />
-                    </div>
-                </div>
-                <div class="col-md-1 text-end">
-                    <div class="page-title">
-                        <strong>Xin chào, <span id="username">@userName</span></strong><br />
-                        <strong><a href="/Logout">Đăng xuất</a></strong>
+                        <h5>Chuyển dịch vỏ trái đất tại Việt Nam</h5>
+                        <div>
+                            <strong>Cục Đo đạc, Bản đồ và Thông tin địa lý Việt Nam</strong><br />
+                            <strong>Trung tâm Quản lý mạng lưới trạm định vị vệ tinh quốc gia</strong><br />
+                        </div>
+                        <div>
+                            <strong>Xin chào, <span id="username">@userName</span></strong><br />
+                            <strong><a href="/Logout">Đăng xuất</a></strong>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -65,14 +68,14 @@
                                 <li class="esri-toggle-tree__item">
                                     <strong class="esri-toggle-tree__title">Chu kỳ</strong>
                                     <ul class="toggle_layer_ul">
-                                        <li class="esri-toggle-tree__item">
+                                        @* <li class="esri-toggle-tree__item">
                                             <label class="esri-toggle-tree__label">
                                                 <input type="radio" name="chu_ky" class="esri-toggle-tree__radio"
                                                     id="chu_ky_trung_binh_hang_nam" checked>
                                                 <span class="esri-toggle-tree__title">Trung bình hàng năm (từ ngày
                                                     26/08/2019)</span>
                                             </label>
-                                        </li>
+                                        </li> *@
                                         <li class="esri-toggle-tree__item">
                                             <label class="esri-toggle-tree__label">
                                                 <input type="radio" name="chu_ky" class="esri-toggle-tree__radio"
@@ -83,7 +86,7 @@
                                         <li class="esri-toggle-tree__item">
                                             <label class="esri-toggle-tree__label">
                                                 <input type="radio" name="chu_ky" class="esri-toggle-tree__radio"
-                                                    id="chu_ky_1_nam">
+                                                    id="chu_ky_1_nam" checked>
                                                 <span class="esri-toggle-tree__title">1 năm</span>
                                             </label>
                                         </li>
@@ -315,7 +318,7 @@
 
     <script src="~/node_modules/fortawesome/fontawesome-free/js/all.min.js"></script>
 
-    
+
 
     <script>
         //require(["js/main", "js/identify_task", "js/print", "js/toggle_layer", "js/select_feature", "js/features_search"]);

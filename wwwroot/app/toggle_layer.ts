@@ -45,7 +45,7 @@ $(document).on("change", ".esri-toggle-tree__radio", function () {
       checkedIds.push($(this).attr("id"));
     }
   });
-  var visible_layer_id :number = 0;
+  var visible_layer_id: number = 0;
   if (checkedIds.length === 2) {
     //2 options selected
     if (checkedIds.includes("huong_ngang") && checkedIds.includes("chu_ky_trung_binh_hang_nam")) {
@@ -85,7 +85,7 @@ $(document).on("change", ".esri-toggle-tree__radio", function () {
 
     //hide other layers
     map_layer.getVisibleLayers().forEach((sublayerId) => {
-      if (sublayerId !== visible_layer_id && sublayerId !== init.ErsiLayers.TenTramCORS 
+      if (sublayerId !== visible_layer_id && sublayerId !== init.ErsiLayers.TenTramCORS
         && sublayerId !== init.ErsiLayers.HanhChinhTinh) {
         var sublayer = map_layer.findSublayerById(sublayerId);
         sublayer.visible = false;
@@ -98,16 +98,22 @@ $(document).on("change", ".esri-toggle-tree__radio", function () {
 
 });
 
-$(document).on("click", "#download_moving_detail", function () {        
+$(document).on("click", "#download_moving_detail", function () {
+  const checkedIds: string[] = [];
+  $(".esri-toggle-tree__radio").each(function () {
+    if ($(this).is(":checked")) {
+      checkedIds.push($(this).attr("id"));
+    }
+  });
   //do something
   const KhoangThoiGian = document.getElementById("KhoangThoiGian").outerHTML;
   const table = document.getElementById("bangVanToc").outerHTML;
-  const blob = new Blob([KhoangThoiGian,table], { type: "application/vnd.ms-excel" });
+  const blob = new Blob([KhoangThoiGian, table], { type: "application/vnd.ms-excel" });
   const url = URL.createObjectURL(blob);
 
   const a = document.createElement("a");
   a.href = url;
-  a.download = "bang.xls"; // Hoặc bang.xls nếu muốn mở bằng Excel
+  a.download = `chitietchuyendich_${checkedIds[0]}.xls`; // Hoặc bang.xls nếu muốn mở bằng Excel
   a.click();
   URL.revokeObjectURL(url);
 });
@@ -353,7 +359,7 @@ function getLegendImage(layerId: number, layer_legends: any[]) {
 }
 
 //add tablevantoc for the first layer
-addTableVanToc(0);
+addTableVanToc(4);
 
 $(document).on('click', ".toggle-tree", function () {
   $(this).toggleClass("collapse-layer");

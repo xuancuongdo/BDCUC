@@ -65,7 +65,9 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables", "e
             .execute(params)
             .then(function (response) {
             var results = response.results;
-            return results.map(function (result) {
+            return results
+                .filter((result) => !TenTram.includes(result.layerName))
+                .map(function (result) {
                 var feature = result.feature;
                 var layerName = result.layerName;
                 feature.attributes.layerName = layerName;
@@ -98,7 +100,7 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables", "e
                 }
                 else if (vantoc.includes(layerName)) {
                     feature.popupTemplate = {
-                        content: "<b>Tên trạm:</b> {Tên}<br>" +
+                        content: "<b>Tên trạm:</b> {Tên}" +
                             "<br><b>d.North(m):</b> {VNorth}" +
                             "<br><b>d.East(m):</b> {VEast}" +
                             "<br><b>d.Up(m):</b> {VUp}" +

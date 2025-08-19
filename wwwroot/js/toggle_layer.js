@@ -66,13 +66,19 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables", ".
         }
     });
     $(document).on("click", "#download_moving_detail", function () {
+        const checkedIds = [];
+        $(".esri-toggle-tree__radio").each(function () {
+            if ($(this).is(":checked")) {
+                checkedIds.push($(this).attr("id"));
+            }
+        });
         const KhoangThoiGian = document.getElementById("KhoangThoiGian").outerHTML;
         const table = document.getElementById("bangVanToc").outerHTML;
         const blob = new Blob([KhoangThoiGian, table], { type: "application/vnd.ms-excel" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = "bang.xls";
+        a.download = `chitietchuyendich_${checkedIds[0]}.xls`;
         a.click();
         URL.revokeObjectURL(url);
     });
@@ -178,7 +184,7 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables", ".
             }
         }
     }
-    table_vantoc_1.default(0);
+    table_vantoc_1.default(4);
     $(document).on('click', ".toggle-tree", function () {
         $(this).toggleClass("collapse-layer");
     });
