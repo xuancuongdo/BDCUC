@@ -145,10 +145,10 @@ li {
   /* height:100%; */
   /* text-align: center;
   justify-content: center; */
-  position: absolute;
+  /* position: absolute;
   top: 55%;
   -ms-transform: translateY(-60%);
-  transform: translateY(-60%);
+  transform: translateY(-60%); */
 }
 
 .page-title-container {
@@ -268,3 +268,8 @@ td {
 table {
   border-collapse: collapse;
 }
+
+@media (max-width: 580px) {
+  .logo{ display: none; } /* Ẩn cột tiêu đề lớn */
+}
+
