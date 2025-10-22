@@ -100,7 +100,7 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables", "e
                 }
                 else if (vantoc.includes(layerName)) {
                     feature.popupTemplate = {
-                        content: "<b>Tên trạm:</b> {Tên}" +
+                        content: "<b>Tên trạm:</b> {Tên}<br>" +
                             "<br><b>d.North(m):</b> {VNorth}" +
                             "<br><b>d.East(m):</b> {VEast}" +
                             "<br><b>d.Up(m):</b> {VUp}" +

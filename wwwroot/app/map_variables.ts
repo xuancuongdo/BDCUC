@@ -46,7 +46,7 @@ export var map_layer_Background = new MapLayer("https://basemap.bandovn.vn/serve
 
 export const map = new EsriMap({
   //basemap: "streets-vector"
-  basemap: "satellite"
+  basemap: basemap
   //basemap: "hybrid"
   //basemap : {baseLayers: [layer]}
   //basemap : {baseLayers: [map_layer_Background.getMapLayer()]}
@@ -63,7 +63,7 @@ export const view = new MapView({
 export const basemapToggle = new BasemapToggle({
   view: view,  // The view that provides access to the map's "streets-vector" basemap
   //nextBasemap: "satellite"  // Allows for toggling to the "hybrid" basemap
-  nextBasemap: basemap//{baseLayers: [layer]}//"streets-vector"  // Allows for toggling to the "hybrid" basemap
+  nextBasemap: "satellite"//{baseLayers: [layer]}//"streets-vector"  // Allows for toggling to the "hybrid" basemap
   //nextBasemap: "satellite",
 });
 

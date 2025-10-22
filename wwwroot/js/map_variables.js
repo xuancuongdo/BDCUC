@@ -1,4 +1,4 @@
-define(["require", "exports", "tslib", "./tile_layer", "esri/Map", "esri/views/MapView", "./init_variables", "./map_layer", "esri/widgets/BasemapToggle", "esri/layers/WMSLayer", "esri/Basemap"], function (require, exports, tslib_1, tile_layer_1, Map_1, MapView_1, init, map_layer_1, BasemapToggle_1, WMSLayer_1, Basemap_1) {
+define(["require", "exports", "tslib", "./tile_layer", "esri/Map", "esri/views/MapView", "./init_variables", "./map_layer", "esri/widgets/BasemapToggle", "esri/layers/WMSLayer", "esri/Basemap", "esri/layers/WebTileLayer"], function (require, exports, tslib_1, tile_layer_1, Map_1, MapView_1, init, map_layer_1, BasemapToggle_1, WMSLayer_1, Basemap_1, WebTileLayer_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.basemapToggle = exports.view = exports.map = exports.map_layer_Background = exports.basemap = exports.layer = exports.till_layer = exports.map_layer = void 0;
@@ -8,6 +8,7 @@ define(["require", "exports", "tslib", "./tile_layer", "esri/Map", "esri/views/M
     BasemapToggle_1 = tslib_1.__importDefault(BasemapToggle_1);
     WMSLayer_1 = tslib_1.__importDefault(WMSLayer_1);
     Basemap_1 = tslib_1.__importDefault(Basemap_1);
+    WebTileLayer_1 = tslib_1.__importDefault(WebTileLayer_1);
     exports.map_layer = new map_layer_1.MapLayer(init.hanhchinh_url);
     exports.till_layer = new tile_layer_1.TileMapLayer(init.hanhchinh_url);
     exports.layer = new WMSLayer_1.default({
@@ -18,15 +19,19 @@ define(["require", "exports", "tslib", "./tile_layer", "esri/Map", "esri/views/M
             }
         ]
     });
+    const vnTileLayer = new WebTileLayer_1.default({
+        urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+        copyright: "© OpenStreetMap contributors"
+    });
     exports.basemap = new Basemap_1.default({
-        baseLayers: [exports.layer],
+        baseLayers: [vnTileLayer],
         title: "basemap",
         id: "0",
         thumbnailUrl: "img/streetsVN.png"
     });
     exports.map_layer_Background = new map_layer_1.MapLayer("https://basemap.bandovn.vn/server/rest/services/bdgiaothong_v11/MapServer?f=jsapi");
     exports.map = new Map_1.default({
-        basemap: "satellite"
+        basemap: exports.basemap
     });
     exports.view = new MapView_1.default({
         map: exports.map,
@@ -36,7 +41,7 @@ define(["require", "exports", "tslib", "./tile_layer", "esri/Map", "esri/views/M
     });
     exports.basemapToggle = new BasemapToggle_1.default({
         view: exports.view,
-        nextBasemap: exports.basemap
+        nextBasemap: "satellite"
     });
     exports.view.ui.add(exports.basemapToggle, {
         position: "bottom-left"
