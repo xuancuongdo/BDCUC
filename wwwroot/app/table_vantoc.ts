@@ -39,10 +39,10 @@ export default async function addTableVanToc(id_layerShow: number) {
     if (response.features.length > 0) {
       //Là lớp dữ liệu trung bình 1 năm
       if (id_layerShow == 0 || id_layerShow == 1) {
-        bangVanToc.innerHTML = "<tr><td><b>STT</b></td><td><b>Tên trạm</b></td><td><b>d.North<br />m/year</b></td><td><b>d.East<br />m/year</b></td><td><b>d.Up<br />m/year</b></td><td><b>Mặt phẳng<br />m/year</b></td></tr>";
+        bangVanToc.innerHTML = "<tr><td><b>STT</b></td><td><b>Tên trạm</b></td><td><b>Hướng Bắc<br />m/year</b></td><td><b>Hướng Đông<br />m/year</b></td><td><bHướng Đứng<br />m/year</b></td><td><b>Hướng Ngang<br />m/year</b></td></tr>";
       }
       else
-        bangVanToc.innerHTML = "<tr><td><b>STT</b></td><td><b>Tên trạm</b></td><td><b>d.North<br />(m)</b></td><td><b>d.East<br />(m)</b></td><td><b>d.Up<br />(m)</b></td><td><b>Mặt phẳng<br />(m)</b></td></tr>";
+        bangVanToc.innerHTML = "<tr><td><b>STT</b></td><td><b>Tên trạm</b></td><td><b>Hướng Bắc<br />(m)</b></td><td><b>Hướng Đông<br />(m)</b></td><td><b>Hướng Đứng<br />(m)</b></td><td><b>Hướng Ngang<br />(m)</b></td></tr>";
 
       response.features.map((feature: any) => {
         //list_feature.push(feature);//Đưa danh sách đối tượng vào mảng list_feature
@@ -58,7 +58,7 @@ export default async function addTableVanToc(id_layerShow: number) {
       });
     }
     else {
-      bangVanToc.innerHTML = "Chi tiết dữ liệu trống";
+      bangVanToc.innerHTML = "Giá trị chuyển dịch trống";
     }
   });
   const tableCORS = document.getElementById("TableCORS");
