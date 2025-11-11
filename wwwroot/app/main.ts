@@ -68,7 +68,7 @@ $(document).on("click", "#btn_drawing_chart", async function () {
 
   // Kiểm tra có chọn ngày chưa
   if (!startDateStr || !endDateStr || !cors_name) {
-    alert("Vui lòng chọn trạm CORS, ngày bắt đầu và ngày kết thúc!");
+    alert("Vui lòng chọn trạm định vị vệ tinh quốc gia, từ ngày và đến ngày!");
     return;
   }
 
@@ -140,7 +140,7 @@ const correctChartData = {
       labels,
       datasets: [
         {
-          label: 'Trục bắc (North)',
+          label: 'Hướng Bắc (North)',
           data: northValues,
           backgroundColor: 'rgba(75, 192, 192, 0.5)',
           borderColor: 'rgba(75, 192, 192, 1)',
@@ -160,7 +160,7 @@ const correctChartData = {
         y: {
           title: {
             display: true,
-            text: 'Trục bắc'
+            text: 'Độ lệch hướng Bắc'
           },
           beginAtZero: true
         }
@@ -174,7 +174,7 @@ const correctChartData = {
       labels,
       datasets: [
         {
-          label: 'Trục Đông (East)',
+          label: 'Hướng Đông (East)',
           data: eastValues,
           backgroundColor: 'rgba(255, 99, 132, 0.5)', // đỏ nhạt
           borderColor: 'rgba(255, 99, 132, 1)', // đỏ đậm
@@ -194,7 +194,7 @@ const correctChartData = {
         y: {
           title: {
             display: true,
-            text: 'Trục đông'
+            text: 'Độ lệch hướng Đông'
           },
           beginAtZero: true
         }
@@ -207,7 +207,7 @@ const correctChartData = {
       labels,
       datasets: [
         {
-          label: 'Trục Đứng (Altitude)',
+          label: 'Hướng Đứng (Altitude)',
           data: altitudeValues,
           backgroundColor: 'rgba(54, 162, 235, 0.5)', // xanh dương nhạt
           borderColor: 'rgba(54, 162, 235, 1)', // xanh dương đậm
@@ -227,7 +227,7 @@ const correctChartData = {
         y: {
           title: {
             display: true,
-            text: 'Trục đứng'
+            text: 'Độ lệch hướng Đứng'
           },
           beginAtZero: true
         }

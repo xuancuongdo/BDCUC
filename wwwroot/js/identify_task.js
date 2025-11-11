@@ -91,21 +91,23 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables", "e
                 else if (vantocTrungBinh.includes(layerName)) {
                     feature.popupTemplate = {
                         content: "<b>Tên trạm:</b> {Tên}<br>" +
-                            "<br><b>d.North(m/year):</b> {VNorth}" +
-                            "<br><b>d.East(m/year):</b> {VEast}" +
-                            "<br><b>d.Up(m/year):</b> {VUp}" +
-                            "<br><b>Mặt phẳng(m/year):</b> {Vmp}" +
-                            "<br><b>Khoảng thời gian:</b> {ThoiDiemThamChieu}",
+                            "<br><b>Hướng Bắc(m/year):</b> {VNorth}" +
+                            "<br><b>Hướng Đông(m/year):</b> {VEast}" +
+                            "<br><b>Hướng Đứng(m/year):</b> {VUp}" +
+                            "<br><b>Hướng Ngang(m/year):</b> {Vmp}" +
+                            "<br><b>Khoảng thời gian:</b> {ThoiDiemThamChieu}" +
+                            "<br><b>Địa chỉ:</b> {DiaChi}",
                     };
                 }
                 else if (vantoc.includes(layerName)) {
                     feature.popupTemplate = {
                         content: "<b>Tên trạm:</b> {Tên}<br>" +
-                            "<br><b>d.North(m):</b> {VNorth}" +
-                            "<br><b>d.East(m):</b> {VEast}" +
-                            "<br><b>d.Up(m):</b> {VUp}" +
-                            "<br><b>Mặt phẳng(m):</b> {Vmp}" +
-                            "<br><b>Khoảng thời gian:</b> {ThoiDiemThamChieu}",
+                            "<br><b>Hướng Bắc(m):</b> {VNorth}" +
+                            "<br><b>Hướng Đông(m):</b> {VEast}" +
+                            "<br><b>Hướng Đứng(m):</b> {VUp}" +
+                            "<br><b>Hướng Ngang(m):</b> {Vmp}" +
+                            "<br><b>Khoảng thời gian:</b> {ThoiDiemThamChieu}" +
+                            "<br><b>Địa chỉ:</b> {DiaChi}",
                     };
                 }
                 else if (TenTram.includes(layerName)) {

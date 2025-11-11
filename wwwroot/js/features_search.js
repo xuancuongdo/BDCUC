@@ -5,14 +5,20 @@ define(["require", "exports", "tslib", "esri/layers/FeatureLayer", "esri/widgets
     FeatureLayer_1 = tslib_1.__importDefault(FeatureLayer_1);
     Search_1 = tslib_1.__importDefault(Search_1);
     init = tslib_1.__importStar(init);
-    var TramCORS = setSource(0, "CHUYỂN DỊCH TRUNG BÌNH/NĂM", "<p><b>Tên trạm:</b> {Tên}</p><p><b>d.North(m/year):</b> {VNorth}</p><p><b>d.East(m/year):</b> {VEast}</p><p><b>d.Up(m/year):</b> {VUp}</p><p><b>Mặt phẳng(m/year):</b> {Vmp}</p><p><b>Khoảng thời gian:</b> {ThoiDiemThamChieu}</p>", ["Tên"], "Tên", ["Tên", "VNorth", "VEast", "VUp", "Vmp", "ThoiDiemThamChieu"]);
+    var ChuKy_month = setSource(2, "CHUYỂN DỊCH CHU KỲ 1 THÁNG", "<p><b>Tên trạm:</b> {Tên}</p><p><b>Hướng Bắc(m):</b> {VNorth}</p><p><b>Hướng Đông(m):</b> {VEast}</p><p><b>Hướng Đứng(m):</b> {VUp}</p><p><b>Hướng Ngang(m):</b> {Vmp}</p><p><b>Khoảng thời gian:</b> {ThoiDiemThamChieu}</p><p><b>Địa chỉ:</b> {DiaChi}</p>", ["Tên"], "Tên", ["Tên", "VNorth", "VEast", "VUp", "Vmp", "ThoiDiemThamChieu", "DiaChi"]);
+    var ChuKy_year = setSource(4, "CHUYỂN DỊCH CHU KỲ 1 NĂM", "<p><b>Tên trạm:</b> {Tên}</p><p><b>Hướng Bắc(m):</b> {VNorth}</p><p><b>Hướng Đông(m):</b> {VEast}</p><p><b>Hướng Đứng(m):</b> {VUp}</p><p><b>Hướng Ngang(m):</b> {Vmp}</p><p><b>Khoảng thời gian:</b> {ThoiDiemThamChieu}</p><p><b>Địa chỉ:</b> {DiaChi}</p>", ["Tên"], "Tên", ["Tên", "VNorth", "VEast", "VUp", "Vmp", "ThoiDiemThamChieu", "DiaChi"]);
+    var ChuKy_5year = setSource(6, "CHUYỂN DỊCH CHU KỲ 5 NĂM", "<p><b>Tên trạm:</b> {Tên}</p><p><b>Hướng Bắc(m):</b> {VNorth}</p><p><b>Hướng Đông(m):</b> {VEast}</p><p><b>Hướng Đứng(m):</b> {VUp}</p><p><b>Hướng Ngang(m):</b> {Vmp}</p><p><b>Khoảng thời gian:</b> {ThoiDiemThamChieu}</p><p><b>Địa chỉ:</b> {DiaChi}</p>", ["Tên"], "Tên", ["Tên", "VNorth", "VEast", "VUp", "Vmp", "ThoiDiemThamChieu", "DiaChi"]);
+    var ChuKy_10year = setSource(8, "CHUYỂN DỊCH TỪ NGÀY 26/08/2019", "<p><b>Tên trạm:</b> {Tên}</p><p><b>Hướng Bắc(m):</b> {VNorth}</p><p><b>Hướng Đông(m):</b> {VEast}</p><p><b>Hướng Đứng(m):</b> {VUp}</p><p><b>Hướng Ngang(m):</b> {Vmp}</p><p><b>Khoảng thời gian:</b> {ThoiDiemThamChieu}</p><p><b>Địa chỉ:</b> {DiaChi}</p>", ["Tên"], "Tên", ["Tên", "VNorth", "VEast", "VUp", "Vmp", "ThoiDiemThamChieu", "DiaChi"]);
     var tinh = setSource(11, "HÀNH CHÍNH TỈNH", "<p><b>Tên tỉnh:</b> {Ten}</p>", ["Ten"], "Ten", ["Ten"]);
     exports.searchWidget = new Search_1.default({
         view: map_variables_1.view,
         allPlaceholder: "Tìm kiếm trạm CORS, tỉnh",
         includeDefaultSources: false,
         sources: [
-            TramCORS,
+            ChuKy_month,
+            ChuKy_year,
+            ChuKy_5year,
+            ChuKy_10year,
             tinh
         ],
     });

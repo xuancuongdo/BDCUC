@@ -59,8 +59,16 @@ var xa = setSource(28, "Hành chính xã", "<p>Tên xã: {TenXa}</p><p>Tên huy�
   ["TenXa"], "TenXa", ["TenXa", "TenHuyen", "TenTinh"]);
 var huyen = setSource(29, "Hành chính huyện", "<p>Tên huyện: {ten}</p>",
   ["ten"], "ten", ["ten"]);*/
-var TramCORS = setSource(0, "CHUYỂN DỊCH TRUNG BÌNH/NĂM", "<p><b>Tên trạm:</b> {Tên}</p><p><b>d.North(m/year):</b> {VNorth}</p><p><b>d.East(m/year):</b> {VEast}</p><p><b>d.Up(m/year):</b> {VUp}</p><p><b>Mặt phẳng(m/year):</b> {Vmp}</p><p><b>Khoảng thời gian:</b> {ThoiDiemThamChieu}</p>", 
-  ["Tên"], "Tên", ["Tên", "VNorth", "VEast", "VUp", "Vmp", "ThoiDiemThamChieu"]);
+/*var TramCORS = setSource(0, "CHUYỂN DỊCH TRUNG BÌNH/NĂM", "<p><b>Tên trạm:</b> {Tên}</p><p><b>d.North(m/year):</b> {VNorth}</p><p><b>d.East(m/year):</b> {VEast}</p><p><b>d.Up(m/year):</b> {VUp}</p><p><b>Mặt phẳng(m/year):</b> {Vmp}</p><p><b>Khoảng thời gian:</b> {ThoiDiemThamChieu}</p>", 
+  ["Tên"], "Tên", ["Tên", "VNorth", "VEast", "VUp", "Vmp", "ThoiDiemThamChieu"]);*/
+var ChuKy_month = setSource(2, "CHUYỂN DỊCH CHU KỲ 1 THÁNG", "<p><b>Tên trạm:</b> {Tên}</p><p><b>Hướng Bắc(m):</b> {VNorth}</p><p><b>Hướng Đông(m):</b> {VEast}</p><p><b>Hướng Đứng(m):</b> {VUp}</p><p><b>Hướng Ngang(m):</b> {Vmp}</p><p><b>Khoảng thời gian:</b> {ThoiDiemThamChieu}</p><p><b>Địa chỉ:</b> {DiaChi}</p>", 
+  ["Tên"], "Tên", ["Tên", "VNorth", "VEast", "VUp", "Vmp", "ThoiDiemThamChieu","DiaChi"]);
+var ChuKy_year = setSource(4, "CHUYỂN DỊCH CHU KỲ 1 NĂM", "<p><b>Tên trạm:</b> {Tên}</p><p><b>Hướng Bắc(m):</b> {VNorth}</p><p><b>Hướng Đông(m):</b> {VEast}</p><p><b>Hướng Đứng(m):</b> {VUp}</p><p><b>Hướng Ngang(m):</b> {Vmp}</p><p><b>Khoảng thời gian:</b> {ThoiDiemThamChieu}</p><p><b>Địa chỉ:</b> {DiaChi}</p>", 
+  ["Tên"], "Tên", ["Tên", "VNorth", "VEast", "VUp", "Vmp", "ThoiDiemThamChieu","DiaChi"]);
+var ChuKy_5year = setSource(6, "CHUYỂN DỊCH CHU KỲ 5 NĂM", "<p><b>Tên trạm:</b> {Tên}</p><p><b>Hướng Bắc(m):</b> {VNorth}</p><p><b>Hướng Đông(m):</b> {VEast}</p><p><b>Hướng Đứng(m):</b> {VUp}</p><p><b>Hướng Ngang(m):</b> {Vmp}</p><p><b>Khoảng thời gian:</b> {ThoiDiemThamChieu}</p><p><b>Địa chỉ:</b> {DiaChi}</p>", 
+  ["Tên"], "Tên", ["Tên", "VNorth", "VEast", "VUp", "Vmp", "ThoiDiemThamChieu","DiaChi"]);
+var ChuKy_10year = setSource(8, "CHUYỂN DỊCH TỪ NGÀY 26/08/2019", "<p><b>Tên trạm:</b> {Tên}</p><p><b>Hướng Bắc(m):</b> {VNorth}</p><p><b>Hướng Đông(m):</b> {VEast}</p><p><b>Hướng Đứng(m):</b> {VUp}</p><p><b>Hướng Ngang(m):</b> {Vmp}</p><p><b>Khoảng thời gian:</b> {ThoiDiemThamChieu}</p><p><b>Địa chỉ:</b> {DiaChi}</p>", 
+  ["Tên"], "Tên", ["Tên", "VNorth", "VEast", "VUp", "Vmp", "ThoiDiemThamChieu","DiaChi"]);
 var tinh = setSource(11, "HÀNH CHÍNH TỈNH", "<p><b>Tên tỉnh:</b> {Ten}</p>", 
   ["Ten"], "Ten", ["Ten"]);
 
@@ -96,7 +104,11 @@ export const searchWidget = new Search({
     quan_khu,
     xa,
     huyen,*/
-    TramCORS,
+    //TramCORS,
+    ChuKy_month,
+    ChuKy_year,
+    ChuKy_5year,
+    ChuKy_10year,
     tinh
   ],
 });
