@@ -1,7 +1,8 @@
 define(["require", "exports", "tslib", "esri/layers/FeatureLayer", "./init_variables"], function (require, exports, tslib_1, FeatureLayer_1, init) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.GetDataForStatistic = void 0;
+    exports.default = getCORSLayers;
+    exports.GetDataForStatistic = GetDataForStatistic;
     FeatureLayer_1 = tslib_1.__importDefault(FeatureLayer_1);
     init = tslib_1.__importStar(init);
     function getCORSLayers(id_layerShow) {
@@ -21,7 +22,6 @@ define(["require", "exports", "tslib", "esri/layers/FeatureLayer", "./init_varia
             }
         });
     }
-    exports.default = getCORSLayers;
     function GetDataForStatistic(cors_name, from_date, to_date) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const apiUrl = "/api/MovingChart";
@@ -48,6 +48,5 @@ define(["require", "exports", "tslib", "esri/layers/FeatureLayer", "./init_varia
             }
         });
     }
-    exports.GetDataForStatistic = GetDataForStatistic;
 });
 //# sourceMappingURL=statistic.js.map

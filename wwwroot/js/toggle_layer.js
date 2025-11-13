@@ -1,9 +1,9 @@
 define(["require", "exports", "tslib", "./map_variables", "./init_variables", "./table_vantoc"], function (require, exports, tslib_1, map_variables_1, init, table_vantoc_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.http = void 0;
+    exports.http = http;
     init = tslib_1.__importStar(init);
-    table_vantoc_1 = tslib_1.__importDefault(table_vantoc_1);
+    table_vantoc_1 = tslib_1.__importStar(table_vantoc_1);
     var toggle_layer = false;
     $(document).on("change", ".layer-toggle", function () {
         var id = $(this).data("id");
@@ -62,25 +62,51 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables", ".
                     sublayer.visible = false;
                 }
             });
-            table_vantoc_1.default(visible_layer_id);
+            (0, table_vantoc_1.default)(visible_layer_id);
         }
     });
-    $(document).on("click", "#download_moving_detail", function () {
-        const checkedIds = [];
-        $(".esri-toggle-tree__radio").each(function () {
-            if ($(this).is(":checked")) {
-                checkedIds.push($(this).attr("id"));
+    $(document).on("click", "#btn_download_modal", function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            var selectedValue = $('#periodSelect').val();
+            var visible_layer_id = 0;
+            var fileName = "";
+            switch (selectedValue) {
+                case '1thang':
+                    console.log("Bạn đã chọn 1 tháng");
+                    visible_layer_id = init.ErsiLayers.Matphang_NE_month;
+                    fileName = "1Thang";
+                    break;
+                case '1nam':
+                    console.log("Bạn đã chọn 1 năm");
+                    visible_layer_id = init.ErsiLayers.Matphang_NE_year;
+                    fileName = "1Nam";
+                    break;
+                case '5nam':
+                    console.log("Bạn đã chọn 5 năm");
+                    visible_layer_id = init.ErsiLayers.Matphang_NE_5years;
+                    fileName = "5Nam";
+                    break;
+                case 'tu26082019':
+                    console.log("Bạn đã chọn từ ngày 26/08/2019");
+                    visible_layer_id = init.ErsiLayers.Matphang_NE_10years;
+                    fileName = "10Nam";
+                    break;
+                default:
+                    console.log("Vui lòng chọn một chu kỳ");
+                    alert('Vui lòng chọn một chu kỳ');
+                    break;
             }
+            yield (0, table_vantoc_1.addTableVanTocDownload)(visible_layer_id);
+            const KhoangThoiGian = document.getElementById("khoangThoiGianDownload").outerHTML;
+            const table = document.getElementById("bangVanTocDownload").outerHTML;
+            const blob = new Blob([KhoangThoiGian, table], { type: "application/vnd.ms-excel" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `BaoCaoChuyenDich_${fileName}.xls`;
+            a.click();
+            URL.revokeObjectURL(url);
         });
-        const KhoangThoiGian = document.getElementById("KhoangThoiGian").outerHTML;
-        const table = document.getElementById("bangVanToc").outerHTML;
-        const blob = new Blob([KhoangThoiGian, table], { type: "application/vnd.ms-excel" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `chitietchuyendich_${checkedIds[0]}.xls`;
-        a.click();
-        URL.revokeObjectURL(url);
     });
     function http(request) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
@@ -89,7 +115,6 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables", ".
             return body;
         });
     }
-    exports.http = http;
     const fetch_layer_name = () => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
         const response = yield fetch(init.layer_url);
         const legends = yield fetch(init.hanhchinh_url + "/legend?f=pjson");
@@ -184,7 +209,7 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables", ".
             }
         }
     }
-    table_vantoc_1.default(4);
+    (0, table_vantoc_1.default)(4);
     $(document).on('click', ".toggle-tree", function () {
         $(this).toggleClass("collapse-layer");
     });

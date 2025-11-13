@@ -2,7 +2,7 @@ import { view } from "./map_variables";
 import { map_layer } from "./map_variables";
 import * as init from "./init_variables";
 import { LayerOptions } from "./init_variables";
-import addTableVanToc from "./table_vantoc";
+import addTableVanToc, { addTableVanTocDownload } from "./table_vantoc";
 interface HttpResponse<T> extends Response {
   parsedBody?: T;
 }
@@ -98,30 +98,61 @@ $(document).on("change", ".esri-toggle-tree__radio", function () {
 
 });
 
-$(document).on("click", "#download_moving_detail", function () {
-  const checkedIds: string[] = [];
-  $(".esri-toggle-tree__radio").each(function () {
-    if ($(this).is(":checked")) {
-      checkedIds.push($(this).attr("id"));
-    }
-  });
-  //do something
-  const KhoangThoiGian = document.getElementById("KhoangThoiGian").outerHTML;
-  const table = document.getElementById("bangVanToc").outerHTML;
+$(document).on("click", "#btn_download_modal",async function () {
+  var selectedValue = $('#periodSelect').val();
+  var visible_layer_id: number = 0;
+  var fileName: string = "";
+  switch (selectedValue) {
+    case '1thang':
+      console.log("Bạn đã chọn 1 tháng");
+      // Thực hiện hành động cho "1 tháng"
+      visible_layer_id = init.ErsiLayers.Matphang_NE_month;
+      fileName = "1Thang";
+      break;
+    case '1nam':
+      console.log("Bạn đã chọn 1 năm");
+      // Thực hiện hành động cho "1 năm"
+      visible_layer_id = init.ErsiLayers.Matphang_NE_year;
+      fileName = "1Nam";
+      break;
+    case '5nam':
+      console.log("Bạn đã chọn 5 năm");
+      // Thực hiện hành động cho "5 năm"
+      visible_layer_id = init.ErsiLayers.Matphang_NE_5years;
+      fileName = "5Nam";
+
+      break;
+    case 'tu26082019':
+      console.log("Bạn đã chọn từ ngày 26/08/2019");
+      // Thực hiện hành động cho "Từ ngày 26/08/2019"
+      visible_layer_id = init.ErsiLayers.Matphang_NE_10years;
+      fileName = "10Nam";
+
+      break;
+    default:
+      console.log("Vui lòng chọn một chu kỳ");
+      // Thực hiện hành động cho trường hợp không có lựa chọn hợp lệ
+      alert('Vui lòng chọn một chu kỳ')
+      break;
+  }
+  // ghi ra html
+  await addTableVanTocDownload(visible_layer_id)
+
+  // //do something
+  const KhoangThoiGian = document.getElementById("khoangThoiGianDownload").outerHTML;
+  const table = document.getElementById("bangVanTocDownload").outerHTML;
   const blob = new Blob([KhoangThoiGian, table], { type: "application/vnd.ms-excel" });
   const url = URL.createObjectURL(blob);
 
   const a = document.createElement("a");
   a.href = url;
-  a.download = `chitietchuyendich_${checkedIds[0]}.xls`; // Hoặc bang.xls nếu muốn mở bằng Excel
+  a.download = `BaoCaoChuyenDich_${fileName}.xls`; // Hoặc bang.xls nếu muốn mở bằng Excel
   a.click();
   URL.revokeObjectURL(url);
+
 });
-// $(".layer-toggle").change(function () {
-//   var id = $(this).data("id");
-//   var sublayer = map_layer.findSublayerById(parseInt(id));
-//   sublayer.visible = !sublayer.visible;
-// });
+
+
 
 export async function http(request: RequestInfo): Promise<any> {
   const response = await fetch(request);

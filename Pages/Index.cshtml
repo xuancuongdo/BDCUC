@@ -144,7 +144,7 @@
                                         data-toggle="modal" data-target="#statisticModal">Biểu đồ chuyển dịch</a>
                                 </li>
                                 <li class="esri-toggle-tree__item">
-                                    <a class="esri-toggle-tree__label" href="#" id="download_moving_detail">Tải xuống
+                                    <a class="esri-toggle-tree__label" href="" data-toggle="modal" data-target="#downloadModal">Tải xuống
                                         báo cáo chuyển dịch theo chu kỳ</a>
                                 </li>
                                 <li class="esri-toggle-tree__item">
@@ -298,6 +298,7 @@
 
 <!-- Gọi partial -->
 @await Html.PartialAsync("_ViewStatistics")
+@await Html.PartialAsync("_ViewDownloadFile")
 @section Scripts {
     <script>
         // console.log("pathname:" + location.pathname);

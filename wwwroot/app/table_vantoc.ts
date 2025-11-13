@@ -71,6 +71,80 @@ export default async function addTableVanToc(id_layerShow: number) {
   tableCORS.appendChild(bangVanToc);
 };
 
+export async function addTableVanTocDownload(id_layerShow: number) {
+
+  //const id_layerShow = 0;//Lớp thứ 0 (bắt đầu từ 0) là lớp Tên trạm CORS//Lắp id layer khi hiển thị
+  const myFeatureLayer = new FeatureLayer({
+    url: init.map_feature + "/" + id_layerShow,
+    title: "Bảng chuyển dịch"
+  });
+  /*var html = "<table><tr><td>123</td><td>456</td></tr>";
+  html += "<tr><td>123</td><td>456</td></tr></table>";
+  document.getElementById("TableCORS").innerHTML = html;*/
+  //
+  var bangVanToc = document.createElement('table');
+  bangVanToc.id = "bangVanTocDownload";
+  var KhoangThoiGian = document.createElement('div');
+  KhoangThoiGian.id = "khoangThoiGianDownload";
+  KhoangThoiGian.style.display = "flex";
+  //KhoangThoiGian.style.justifyContent = "center";
+  KhoangThoiGian.style.alignItems = "center";
+  //Gọi hàm truy vấn các đối tượng trong lớp Tên trạm CORS
+  //executeQuery();
+  const response: any = await myFeatureLayer.queryFeatures(null);
+  //myFeatureLayer.queryFeatures(null).then(function (response: any) {
+  if (response.features.length > 0) {
+    // Là lớp dữ liệu trung bình 1 năm
+    bangVanToc.innerHTML = `
+        <tr>
+          <td><b>STT</b></td>
+          <td><b>Tên trạm</b></td>
+          <td><b>Kinh độ<br />(độ)</b></td>
+          <td><b>Vỹ độ<br />(độ)</b></td>
+          <td><b>Hướng Bắc<br />(m)</b></td>
+          <td><b>Hướng Đông<br />(m)</b></td>
+          <td><b>Hướng Đứng<br />(m)</b></td>
+          <td><b>Hướng Ngang<br />(m)</b></td>
+          <td><b>Loại trạm</b></td>
+          <td><b>Vị trí cột<br />anten</b></td>
+          <td><b>Địa chỉ</b></td>
+        </tr>
+      `;
+
+    for (const feature of response.features) {
+      bangVanToc.innerHTML += `
+          <tr>
+            <td>${feature.attributes.STT}</td>
+            <td>${feature.attributes.Tên}</td>
+            <td>${feature.attributes.btong.toFixed(4)}</td>
+            <td>${feature.attributes.ltong.toFixed(4)}</td>
+            <td>${feature.attributes.VNorth.toFixed(4)}</td>
+            <td>${feature.attributes.VEast.toFixed(4)}</td>
+            <td>${feature.attributes.VUp.toFixed(4)}</td>
+            <td>${feature.attributes.Vmp.toFixed(4)}</td>
+            <td>${feature.attributes.LoaiTram}</td>
+            <td>${feature.attributes.DiaChi}</td>
+            <td>${feature.attributes.ThoiDiemThamChieu}</td>
+          </tr>
+        `;
+
+      if (KhoangThoiGian.innerHTML === "") {
+        KhoangThoiGian.innerHTML = `Khoảng thời gian: ${feature.attributes.ThoiDiemThamChieu}`;
+      }
+    }
+  } else {
+    bangVanToc.innerHTML = "Giá trị chuyển dịch trống";
+  }
+  //});
+  const tableCORS = document.getElementById("TableCORSDownload");
+  // Xóa toàn bộ con
+  while (tableCORS.firstChild) {
+    tableCORS.removeChild(tableCORS.firstChild);
+  }
+  //Add dữ liệu vào id TableCORS khai ở index.cshtml
+  tableCORS.appendChild(KhoangThoiGian);
+  tableCORS.appendChild(bangVanToc);
+};
 //addTableVanToc();//Gọi thực hiện hàm
 
 //Khai báo dùng dạng bảng của Arcgis, nhưng không tùy chỉnh được kích thước và ẩn đi ... của bảng nên không dùng

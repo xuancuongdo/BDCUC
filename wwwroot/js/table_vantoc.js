@@ -1,6 +1,8 @@
 define(["require", "exports", "tslib", "esri/layers/FeatureLayer", "./init_variables"], function (require, exports, tslib_1, FeatureLayer_1, init) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = addTableVanToc;
+    exports.addTableVanTocDownload = addTableVanTocDownload;
     FeatureLayer_1 = tslib_1.__importDefault(FeatureLayer_1);
     init = tslib_1.__importStar(init);
     function addTableVanToc(id_layerShow) {
@@ -44,7 +46,68 @@ define(["require", "exports", "tslib", "esri/layers/FeatureLayer", "./init_varia
             tableCORS.appendChild(bangVanToc);
         });
     }
-    exports.default = addTableVanToc;
+    ;
+    function addTableVanTocDownload(id_layerShow) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const myFeatureLayer = new FeatureLayer_1.default({
+                url: init.map_feature + "/" + id_layerShow,
+                title: "Bảng chuyển dịch"
+            });
+            var bangVanToc = document.createElement('table');
+            bangVanToc.id = "bangVanTocDownload";
+            var KhoangThoiGian = document.createElement('div');
+            KhoangThoiGian.id = "khoangThoiGianDownload";
+            KhoangThoiGian.style.display = "flex";
+            KhoangThoiGian.style.alignItems = "center";
+            const response = yield myFeatureLayer.queryFeatures(null);
+            if (response.features.length > 0) {
+                bangVanToc.innerHTML = `
+        <tr>
+          <td><b>STT</b></td>
+          <td><b>Tên trạm</b></td>
+          <td><b>Kinh độ<br />(độ)</b></td>
+          <td><b>Vỹ độ<br />(độ)</b></td>
+          <td><b>Hướng Bắc<br />(m)</b></td>
+          <td><b>Hướng Đông<br />(m)</b></td>
+          <td><b>Hướng Đứng<br />(m)</b></td>
+          <td><b>Hướng Ngang<br />(m)</b></td>
+          <td><b>Loại trạm</b></td>
+          <td><b>Vị trí cột<br />anten</b></td>
+          <td><b>Địa chỉ</b></td>
+        </tr>
+      `;
+                for (const feature of response.features) {
+                    bangVanToc.innerHTML += `
+          <tr>
+            <td>${feature.attributes.STT}</td>
+            <td>${feature.attributes.Tên}</td>
+            <td>${feature.attributes.btong.toFixed(4)}</td>
+            <td>${feature.attributes.ltong.toFixed(4)}</td>
+            <td>${feature.attributes.VNorth.toFixed(4)}</td>
+            <td>${feature.attributes.VEast.toFixed(4)}</td>
+            <td>${feature.attributes.VUp.toFixed(4)}</td>
+            <td>${feature.attributes.Vmp.toFixed(4)}</td>
+            <td>${feature.attributes.LoaiTram}</td>
+            <td>${feature.attributes.DiaChi}</td>
+            <td>${feature.attributes.ThoiDiemThamChieu}</td>
+          </tr>
+        `;
+                    if (KhoangThoiGian.innerHTML === "") {
+                        KhoangThoiGian.innerHTML = `Khoảng thời gian: ${feature.attributes.ThoiDiemThamChieu}`;
+                    }
+                }
+            }
+            else {
+                bangVanToc.innerHTML = "Giá trị chuyển dịch trống";
+            }
+            const tableCORS = document.getElementById("TableCORSDownload");
+            while (tableCORS.firstChild) {
+                tableCORS.removeChild(tableCORS.firstChild);
+            }
+            tableCORS.appendChild(KhoangThoiGian);
+            tableCORS.appendChild(bangVanToc);
+        });
+    }
     ;
 });
 //# sourceMappingURL=table_vantoc.js.map

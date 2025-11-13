@@ -4,13 +4,13 @@ define(["require", "exports", "tslib", "esri/layers/TileLayer"], function (requi
     exports.TileMapLayer = void 0;
     TileLayer_1 = tslib_1.__importDefault(TileLayer_1);
     class TileMapLayer {
+        getMapLayer() {
+            return this.tileMap;
+        }
         constructor(url) {
             this.tileMap = new TileLayer_1.default({
                 url: url
             });
-        }
-        getMapLayer() {
-            return this.tileMap;
         }
     }
     exports.TileMapLayer = TileMapLayer;
