@@ -84,6 +84,7 @@ export async function addTableVanTocDownload(id_layerShow: number) {
   //
   var bangVanToc = document.createElement('table');
   bangVanToc.id = "bangVanTocDownload";
+  bangVanToc.style.border = "1px solid black";
   var KhoangThoiGian = document.createElement('div');
   KhoangThoiGian.id = "khoangThoiGianDownload";
   KhoangThoiGian.style.display = "flex";
@@ -96,35 +97,35 @@ export async function addTableVanTocDownload(id_layerShow: number) {
   if (response.features.length > 0) {
     // Là lớp dữ liệu trung bình 1 năm
     bangVanToc.innerHTML = `
-        <tr>
-          <td><b>STT</b></td>
-          <td><b>Tên trạm</b></td>
-          <td><b>Kinh độ<br />(độ)</b></td>
-          <td><b>Vỹ độ<br />(độ)</b></td>
-          <td><b>Hướng Bắc<br />(m)</b></td>
-          <td><b>Hướng Đông<br />(m)</b></td>
-          <td><b>Hướng Đứng<br />(m)</b></td>
-          <td><b>Hướng Ngang<br />(m)</b></td>
-          <td><b>Loại trạm</b></td>
-          <td><b>Vị trí cột<br />anten</b></td>
-          <td><b>Địa chỉ</b></td>
+        <tr style="border: 1px solid black;">
+          <td style="border: 1px solid black;"><b>STT</b></td>
+          <td style="border: 1px solid black;"><b>Tên trạm</b></td>
+          <td style="border: 1px solid black;"><b>Kinh độ<br />(độ)</b></td>
+          <td style="border: 1px solid black;"><b>Vỹ độ<br />(độ)</b></td>
+          <td style="border: 1px solid black;"><b>Hướng Bắc<br />(m)</b></td>
+          <td style="border: 1px solid black;"><b>Hướng Đông<br />(m)</b></td>
+          <td style="border: 1px solid black;"><b>Hướng Đứng<br />(m)</b></td>
+          <td style="border: 1px solid black;"><b>Hướng Ngang<br />(m)</b></td>
+          <td style="border: 1px solid black;"><b>Loại trạm</b></td>
+          <td style="border: 1px solid black;"><b>Vị trí cột<br />anten</b></td>
+          <td style="border: 1px solid black;"><b>Địa chỉ</b></td>
         </tr>
       `;
 
     for (const feature of response.features) {
       bangVanToc.innerHTML += `
-          <tr>
-            <td>${feature.attributes.STT}</td>
-            <td>${feature.attributes.Tên}</td>
-            <td>${feature.attributes.btong.toFixed(4)}</td>
-            <td>${feature.attributes.ltong.toFixed(4)}</td>
-            <td>${feature.attributes.VNorth.toFixed(4)}</td>
-            <td>${feature.attributes.VEast.toFixed(4)}</td>
-            <td>${feature.attributes.VUp.toFixed(4)}</td>
-            <td>${feature.attributes.Vmp.toFixed(4)}</td>
-            <td>${feature.attributes.LoaiTram}</td>
-            <td>${feature.attributes.DiaChi}</td>
-            <td>${feature.attributes.ThoiDiemThamChieu}</td>
+          <tr style="border: 1px solid black;">
+            <td style="border: 1px solid black;">${feature.attributes.STT}</td>
+            <td style="border: 1px solid black;">${feature.attributes.Tên}</td>
+            <td style="border: 1px solid black;">${feature.attributes.btong.toFixed(5)}</td>
+            <td style="border: 1px solid black;">${feature.attributes.ltong.toFixed(5)}</td>
+            <td style="border: 1px solid black;">${feature.attributes.VNorth.toFixed(4)}</td>
+            <td style="border: 1px solid black;">${feature.attributes.VEast.toFixed(4)}</td>
+            <td style="border: 1px solid black;">${feature.attributes.VUp.toFixed(4)}</td>
+            <td style="border: 1px solid black;">${feature.attributes.Vmp.toFixed(4)}</td>
+            <td style="border: 1px solid black;">${feature.attributes.LoaiTram}</td>
+            <td style="border: 1px solid black;">${feature.attributes.ViTriCot}</td>
+            <td style="border: 1px solid black;">${feature.attributes.DiaChi}</td>
           </tr>
         `;
 

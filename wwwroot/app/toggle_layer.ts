@@ -126,7 +126,7 @@ $(document).on("click", "#btn_download_modal",async function () {
       console.log("Bạn đã chọn từ ngày 26/08/2019");
       // Thực hiện hành động cho "Từ ngày 26/08/2019"
       visible_layer_id = init.ErsiLayers.Matphang_NE_10years;
-      fileName = "10Nam";
+      fileName = "Tu26_08_2019";//"10Nam"
 
       break;
     default:
@@ -146,7 +146,7 @@ $(document).on("click", "#btn_download_modal",async function () {
 
   const a = document.createElement("a");
   a.href = url;
-  a.download = `BaoCaoChuyenDich_${fileName}.xls`; // Hoặc bang.xls nếu muốn mở bằng Excel
+  a.download = `BaoCaoChuyenDich_${fileName}.html`; //.xls Hoặc bang.html nếu muốn mở bằng Excel
   a.click();
   URL.revokeObjectURL(url);
 

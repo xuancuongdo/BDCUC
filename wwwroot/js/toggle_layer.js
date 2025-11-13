@@ -1,7 +1,7 @@
 define(["require", "exports", "tslib", "./map_variables", "./init_variables", "./table_vantoc"], function (require, exports, tslib_1, map_variables_1, init, table_vantoc_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.http = http;
+    exports.http = void 0;
     init = tslib_1.__importStar(init);
     table_vantoc_1 = tslib_1.__importStar(table_vantoc_1);
     var toggle_layer = false;
@@ -62,7 +62,7 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables", ".
                     sublayer.visible = false;
                 }
             });
-            (0, table_vantoc_1.default)(visible_layer_id);
+            table_vantoc_1.default(visible_layer_id);
         }
     });
     $(document).on("click", "#btn_download_modal", function () {
@@ -89,21 +89,21 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables", ".
                 case 'tu26082019':
                     console.log("Bạn đã chọn từ ngày 26/08/2019");
                     visible_layer_id = init.ErsiLayers.Matphang_NE_10years;
-                    fileName = "10Nam";
+                    fileName = "Tu26_08_2019";
                     break;
                 default:
                     console.log("Vui lòng chọn một chu kỳ");
                     alert('Vui lòng chọn một chu kỳ');
                     break;
             }
-            yield (0, table_vantoc_1.addTableVanTocDownload)(visible_layer_id);
+            yield table_vantoc_1.addTableVanTocDownload(visible_layer_id);
             const KhoangThoiGian = document.getElementById("khoangThoiGianDownload").outerHTML;
             const table = document.getElementById("bangVanTocDownload").outerHTML;
             const blob = new Blob([KhoangThoiGian, table], { type: "application/vnd.ms-excel" });
             const url = URL.createObjectURL(blob);
             const a = document.createElement("a");
             a.href = url;
-            a.download = `BaoCaoChuyenDich_${fileName}.xls`;
+            a.download = `BaoCaoChuyenDich_${fileName}.html`;
             a.click();
             URL.revokeObjectURL(url);
         });
@@ -115,6 +115,7 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables", ".
             return body;
         });
     }
+    exports.http = http;
     const fetch_layer_name = () => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
         const response = yield fetch(init.layer_url);
         const legends = yield fetch(init.hanhchinh_url + "/legend?f=pjson");
@@ -209,7 +210,7 @@ define(["require", "exports", "tslib", "./map_variables", "./init_variables", ".
             }
         }
     }
-    (0, table_vantoc_1.default)(4);
+    table_vantoc_1.default(4);
     $(document).on('click', ".toggle-tree", function () {
         $(this).toggleClass("collapse-layer");
     });
