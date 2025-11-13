@@ -19,7 +19,7 @@ define(["require", "exports", "tslib", "./map_variables", "./map_variables", "./
     today.setDate(today.getDate() - 22);
     let formattedDate = today.toISOString().split('T')[0];
     $('#endDate').val(formattedDate);
-    statistic_1.default(0);
+    (0, statistic_1.default)(0);
     $(document).on("click", "#btn_drawing_chart", function () {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const startDateStr = document.getElementById('startDate').value;
@@ -40,7 +40,7 @@ define(["require", "exports", "tslib", "./map_variables", "./map_variables", "./
                 alert("Ngày bắt đầu không được lớn hơn ngày kết thúc!");
                 return;
             }
-            var data = yield statistic_1.GetDataForStatistic(cors_name.toString(), common_functions_1.dateToSession(startDateStr), common_functions_1.dateToSession(endDateStr));
+            var data = yield (0, statistic_1.GetDataForStatistic)(cors_name.toString(), (0, common_functions_1.dateToSession)(startDateStr), (0, common_functions_1.dateToSession)(endDateStr));
             const ctx_north = document.getElementById('chartAreaNorth');
             const ctx_east = document.getElementById('chartAreaEast');
             const ctx_altitude = document.getElementById('chartAreaAltitude');

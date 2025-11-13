@@ -83,6 +83,7 @@ export async function addTableVanTocDownload(id_layerShow: number) {
   document.getElementById("TableCORS").innerHTML = html;*/
   //
   var bangVanToc = document.createElement('table');
+  bangVanToc.style.borderCollapse = 'collapse';
   bangVanToc.id = "bangVanTocDownload";
   bangVanToc.style.border = "1px solid black";
   var KhoangThoiGian = document.createElement('div');

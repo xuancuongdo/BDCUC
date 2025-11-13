@@ -24,7 +24,7 @@ define(["require", "exports"], function (require, exports) {
         ErsiLayers[ErsiLayers["DoCao_H_10years"] = 9] = "DoCao_H_10years";
         ErsiLayers[ErsiLayers["TenTramCORS"] = 10] = "TenTramCORS";
         ErsiLayers[ErsiLayers["HanhChinhTinh"] = 11] = "HanhChinhTinh";
-    })(ErsiLayers = exports.ErsiLayers || (exports.ErsiLayers = {}));
+    })(ErsiLayers || (exports.ErsiLayers = ErsiLayers = {}));
     var LayerOptions;
     (function (LayerOptions) {
         LayerOptions["chu_ky_trung_binh_hang_nam"] = "chu_ky_trung_binh_hang_nam";
@@ -35,6 +35,6 @@ define(["require", "exports"], function (require, exports) {
         LayerOptions["huong_ngang"] = "huong_ngang";
         LayerOptions["huong_thang_dung"] = "huong_thang_dung";
         LayerOptions["hien_thi_cors"] = "hien_thi_cors";
-    })(LayerOptions = exports.LayerOptions || (exports.LayerOptions = {}));
+    })(LayerOptions || (exports.LayerOptions = LayerOptions = {}));
 });
 //# sourceMappingURL=init_variables.js.map

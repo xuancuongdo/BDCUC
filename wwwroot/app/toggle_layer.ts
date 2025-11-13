@@ -133,7 +133,7 @@ $(document).on("click", "#btn_download_modal",async function () {
       console.log("Vui lòng chọn một chu kỳ");
       // Thực hiện hành động cho trường hợp không có lựa chọn hợp lệ
       alert('Vui lòng chọn một chu kỳ')
-      break;
+      return;
   }
   // ghi ra html
   await addTableVanTocDownload(visible_layer_id)

@@ -1,7 +1,8 @@
 define(["require", "exports", "tslib", "esri/layers/FeatureLayer", "./init_variables"], function (require, exports, tslib_1, FeatureLayer_1, init) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.addTableVanTocDownload = void 0;
+    exports.default = addTableVanToc;
+    exports.addTableVanTocDownload = addTableVanTocDownload;
     FeatureLayer_1 = tslib_1.__importDefault(FeatureLayer_1);
     init = tslib_1.__importStar(init);
     function addTableVanToc(id_layerShow) {
@@ -45,7 +46,6 @@ define(["require", "exports", "tslib", "esri/layers/FeatureLayer", "./init_varia
             tableCORS.appendChild(bangVanToc);
         });
     }
-    exports.default = addTableVanToc;
     ;
     function addTableVanTocDownload(id_layerShow) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
@@ -54,6 +54,7 @@ define(["require", "exports", "tslib", "esri/layers/FeatureLayer", "./init_varia
                 title: "Bảng chuyển dịch"
             });
             var bangVanToc = document.createElement('table');
+            bangVanToc.style.borderCollapse = 'collapse';
             bangVanToc.id = "bangVanTocDownload";
             bangVanToc.style.border = "1px solid black";
             var KhoangThoiGian = document.createElement('div');
@@ -109,7 +110,6 @@ define(["require", "exports", "tslib", "esri/layers/FeatureLayer", "./init_varia
             tableCORS.appendChild(bangVanToc);
         });
     }
-    exports.addTableVanTocDownload = addTableVanTocDownload;
     ;
 });
 //# sourceMappingURL=table_vantoc.js.map
