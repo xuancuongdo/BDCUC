@@ -20,8 +20,8 @@ define(["require", "exports", "tslib", "./tile_layer", "esri/Map", "esri/views/M
         ]
     });
     const vnTileLayer = new WebTileLayer_1.default({
-        urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-        copyright: "© OpenStreetMap contributors"
+        urlTemplate: "https://vnsdi.mae.gov.vn/basemap/rest/services/BanDoHanhChinhVietNam/MapServer/tile/{z}/{y}/{x}?token=bLqFps_rUstfn-QY_SuFYo5X-zyh_DaftKd1hyul2DMLrlmBlOHg31ad5Tx30y-MFucYW7N2ck38KHnA4XD1kKvAGadfimd2n8Ql_aPCGrc.",
+        copyright: "© DOSMVN"
     });
     exports.basemap = new Basemap_1.default({
         baseLayers: [vnTileLayer],

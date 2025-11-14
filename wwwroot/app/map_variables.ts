@@ -31,8 +31,10 @@ export var till_layer = new TileMapLayer(init.hanhchinh_url);
   });
 
   const vnTileLayer = new WebTileLayer({
-    urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-    copyright: "© OpenStreetMap contributors"
+    //urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    //Cập nhật mã token mới thì dán ở phía cuối token=..
+    urlTemplate: "https://vnsdi.mae.gov.vn/basemap/rest/services/BanDoHanhChinhVietNam/MapServer/tile/{z}/{y}/{x}?token=bLqFps_rUstfn-QY_SuFYo5X-zyh_DaftKd1hyul2DMLrlmBlOHg31ad5Tx30y-MFucYW7N2ck38KHnA4XD1kKvAGadfimd2n8Ql_aPCGrc.",
+    copyright: "© DOSMVN" //"© OpenStreetMap contributors"
   });
   export var basemap = new Basemap({
     baseLayers: [vnTileLayer],

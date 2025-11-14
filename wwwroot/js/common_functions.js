@@ -1,8 +1,7 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.CommonFunctions = void 0;
-    exports.dateToSession = dateToSession;
+    exports.dateToSession = exports.CommonFunctions = void 0;
     class CommonFunctions {
         constructor() { }
         toggleCursor() {
@@ -26,5 +25,6 @@ define(["require", "exports"], function (require, exports) {
         const dayOfYearStr = dayOfYear.toString().padStart(3, '0');
         return `${year}${dayOfYearStr}0`;
     }
+    exports.dateToSession = dateToSession;
 });
 //# sourceMappingURL=common_functions.js.map
