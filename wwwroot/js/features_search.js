@@ -12,7 +12,7 @@ define(["require", "exports", "tslib", "esri/layers/FeatureLayer", "esri/widgets
     var tinh = setSource(11, "HÀNH CHÍNH TỈNH", "<p><b>Tên tỉnh:</b> {Ten}</p>", ["Ten"], "Ten", ["Ten"]);
     exports.searchWidget = new Search_1.default({
         view: map_variables_1.view,
-        allPlaceholder: "Tìm kiếm trạm CORS, tỉnh",
+        allPlaceholder: "Tìm kiếm trạm định vị vệ tinh quốc gia, tỉnh",
         includeDefaultSources: false,
         sources: [
             ChuKy_month,

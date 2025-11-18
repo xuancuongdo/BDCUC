@@ -78,7 +78,7 @@ var tinh = setSource(11, "HÀNH CHÍNH TỈNH", "<p><b>Tên tỉnh:</b> {Ten}</p
 export const searchWidget = new Search({
   //view: map_init.view,//Bỏ chuyển thành view biến khai bên map_variables
   view: view,
-  allPlaceholder: "Tìm kiếm trạm CORS, tỉnh",
+  allPlaceholder: "Tìm kiếm trạm định vị vệ tinh quốc gia, tỉnh",
   includeDefaultSources: false,
   sources: [
     /*diem_toa_do,
